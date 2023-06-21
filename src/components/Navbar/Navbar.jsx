@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Link, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 import logo from "../../assets/stackoverflow.png";
 import search from "../../assets/search.png";
 import Avatar from "../../components/Avatar/Avatar";
@@ -34,10 +34,25 @@ const Navbar = () => {
           </>
         ) : (
           <>
-            <Link to="/">
-              <Avatar>L</Avatar>
-            </Link>
-            <button>LogOut</button>
+            <Avatar
+              backgroundColor="#000000"
+              px="14px"
+              py="10px"
+              borderRadius="50%"
+              color="lightblue"
+            >
+              <Link
+                to="/"
+                style={{
+                  color: "white",
+                  textDecoration: "none",
+                  cursor: "pointer",
+                }}
+              >
+                L
+              </Link>
+            </Avatar>
+            <button className="nav-link">Logout</button>
           </>
         )}
       </div>
