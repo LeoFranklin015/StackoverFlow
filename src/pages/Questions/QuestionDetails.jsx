@@ -29,7 +29,7 @@ const QuestionDetails = () => {
       ],
     },
     {
-      _id: 2,
+      _id: "2",
       upVotes: 3,
       downVotes: 2,
       noOfAnswers: 2,
@@ -49,7 +49,7 @@ const QuestionDetails = () => {
       ],
     },
     {
-      _id: 3,
+      _id: "3",
       upVotes: 3,
       downVotes: 2,
       noOfAnswers: 2,
@@ -82,32 +82,46 @@ const QuestionDetails = () => {
                 <section className="question-details-container">
                   <h1>{question.questionTitle}</h1>
                   <div className="question-details-container-2">
-                    <img src={up} alt="up-arrow" width="20" />
-                    <p>{question.upVotes - question.downVotes}</p>
-                    <img src={down} alt="down-arrow" width="20" />
+                    <div className="question-votes">
+                      <img
+                        src={up}
+                        alt="up-arrow"
+                        width="20"
+                        className="votes-icon"
+                      />
+                      <p>{question.upVotes - question.downVotes}</p>
+                      <img
+                        src={down}
+                        alt="down-arrow"
+                        width="20"
+                        className="votes-icon"
+                      />
+                    </div>
 
                     <div style={{ width: "100%" }}>
                       <p className="question-body">{question.questionBody}</p>
-                      <div className="question-detail-tags">
+                      <div className="question-details-tags">
                         {question.questionTags.map((tag) => (
                           <p>{tag} </p>
                         ))}
                       </div>
                       <div className="question-action-user">
-                        <button type="button">Share</button>
-                        <button type="button">Delete</button>
-                      </div>
-                      <div>
-                        <p>asked {question.askedOn}</p>
-                        <Link
-                          to={`/User/${question.userId}`}
-                          className="user-link"
-                        >
-                          <Avatar backgroundColor="orange" px="5px" py="5px">
-                            {question.userPosted.charAt(0).toUpperCase()}
-                          </Avatar>
-                          <div>{question.userPosted}</div>
-                        </Link>
+                        <div>
+                          <button type="button">Share</button>
+                          <button type="button">Delete</button>
+                        </div>
+                        <div>
+                          <p>asked {question.askedOn}</p>
+                          <Link
+                            to={`/User/${question.userId}`}
+                            className="user-link"
+                          >
+                            <Avatar backgroundColor="orange" px="5px" py="5px">
+                              {question.userPosted.charAt(0).toUpperCase()}
+                            </Avatar>
+                            <div>{question.userPosted}</div>
+                          </Link>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -120,6 +134,35 @@ const QuestionDetails = () => {
                 )}
                 <section className="post-ans-container">
                   <h3>Your Answer</h3>
+                  <form>
+                    <textarea name="" id="" cols="30" rows="10"></textarea>
+                    <br />
+                    <input
+                      type="submit"
+                      className="post-ans-btn"
+                      value="Post your Answer"
+                    ></input>
+                  </form>
+                  <p>
+                    Browse other questions Tagged
+                    {question.questionTags.map((tag) => (
+                      <Link to="/Tags" key={tag} className="ans-tags">
+                        {" "}
+                        {tag}{" "}
+                      </Link>
+                    ))}
+                    <br />
+                    or
+                    <br />{" "}
+                    {
+                      <Link
+                        to="/AskQuestion"
+                        style={{ textDecoration: "none", color: "#009dff" }}
+                      >
+                        ask your own question
+                      </Link>
+                    }
+                  </p>
                 </section>
               </div>
             ))}
