@@ -1,15 +1,18 @@
-nav {
+.main-nav {
   min-height: 50px;
   width: 100%;
   border-top: solid 3px orange;
   margin: 0% auto;
   box-shadow: 0px 1px 5px #00000033;
   position: fixed;
+  z-index: 5;
   background-color: #f8f9f9;
   display: flex;
   justify-content: center;
   align-items: center;
   justify-content: space-between;
+  top: 0%;
+  left: 0%;
 }
 nav img {
   max-height: 30px;
