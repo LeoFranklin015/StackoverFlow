@@ -144,7 +144,8 @@ const QuestionDetails = () => {
                     ></input>
                   </form>
                   <p>
-                    Browse other questions Tagged
+                    Not the answer you're looking for? Browse other questions
+                    Tagged
                     {question.questionTags.map((tag) => (
                       <Link to="/Tags" key={tag} className="ans-tags">
                         {" "}
