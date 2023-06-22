@@ -17,7 +17,7 @@ const LeftSidebar = () => {
             to="/Questions"
             className="side-nav-links"
             activeClassName="active"
-            style={{ paddingLeft: "40px" }}
+            style={{ paddingLeft: "30px" }}
           >
             <img src={Globe} alt="globe" className="globe" />
             <p style={{ paddingLeft: "10px" }}>Questions</p>
@@ -26,7 +26,7 @@ const LeftSidebar = () => {
             to="/Tags"
             className="side-nav-links"
             activeClassName="active"
-            style={{ paddingLeft: "40px" }}
+            style={{ paddingLeft: "30px" }}
           >
             <p style={{ paddingLeft: "25px" }}>Tags</p>
           </NavLink>
@@ -34,7 +34,7 @@ const LeftSidebar = () => {
             to="/Users"
             className="side-nav-links"
             activeClassName="active"
-            style={{ paddingLeft: "40px" }}
+            style={{ paddingLeft: "30px" }}
           >
             <p style={{ paddingLeft: "25px" }}>Users</p>
           </NavLink>
