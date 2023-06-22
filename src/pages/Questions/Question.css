@@ -1,0 +1,6 @@
+.question-detail-page {
+  width: calc(100%-24px);
+  float: left;
+  padding: 0px;
+  margin: 25px;
+}

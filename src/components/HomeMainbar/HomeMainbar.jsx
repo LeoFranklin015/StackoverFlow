@@ -1,60 +1,104 @@
 import React from "react";
 import "./HomeMainbar.css";
-import { Link, useLocation } from "react-router-dom";
+import QuestionList from "./QuestionList";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 const HomeMainbar = () => {
+  const user = null;
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const checkAuth = () => {
+    if (user === null) {
+      alert("Login or signup to ask Question ");
+      navigate("/Auth/");
+    } else {
+      navigate("/AskQuestion");
+    }
+  };
+
   var questionsList = [
     {
-      id: 1,
-      votes: 3,
-      no0fAnswers: 2,
+      _id: 1,
+      upVotes: 3,
+      downVotes: 2,
+      noOfAnswers: 2,
       questionTitle: "What is a function?",
       questionBody: "It meant to be",
-      questionTags: ["java", "node js", "react js", "mongoDB"],
+      questionTags: ["java", "node js", "react js", "mongo db "],
       userPosted: "mano",
-      time: "jan 1",
+      userId: 1,
+      askedOn: "jan 1",
+      answer: [
+        {
+          answerBody: "Answer",
+          userAnswered: "kumar",
+          answeredOn: "jan 2",
+          userld: 2,
+        },
+      ],
     },
     {
-      id: 2,
-      votes: 0,
-      noofAnswers: 0,
+      _id: 2,
+      upVotes: 3,
+      downVotes: 2,
+      noOfAnswers: 2,
       questionTitle: "What is a function?",
       questionBody: "It meant to be",
-      questionTags: ["javascript", "R", "python"],
+      questionTags: ["java", "node js", "react js", "mongo db "],
       userPosted: "mano",
-      time: "jan 1",
+      userId: 1,
+      askedOn: "jan 1",
+      answer: [
+        {
+          answerBody: "Answer",
+          userAnswered: "kumar",
+          answeredOn: "jan 2",
+          userld: 2,
+        },
+      ],
     },
     {
-      id: 3,
-      votes: 1,
-      no0fAnswers: 0,
+      _id: 3,
+      upVotes: 3,
+      downVotes: 2,
+      noOfAnswers: 2,
       questionTitle: "What is a function?",
       questionBody: "It meant to be",
-      questionTags: ["javascript", "R", "python"],
+      questionTags: ["java", "node js", "react js", "mongo db "],
       userPosted: "mano",
-      time: "jan 1",
+      userId: 1,
+      askedOn: "jan 1",
+      answer: [
+        {
+          answerBody: "Answer",
+          userAnswered: "kumar",
+          answeredOn: "jan 2",
+          userld: 2,
+        },
+      ],
     },
   ];
 
-  const location = useLocation();
   return (
     <div className="main-bar">
       <div className="main-bar-header">
         {location.pathname === "/" ? (
           <h1>Top Questions</h1>
         ) : (
-          <h1> All Questions</h1>
+          <h1>All Questions</h1>
         )}
-
-        <Link to="/AskQuestion" className="ask-btn">
+        <button onClick={checkAuth} className="ask-btn">
           Ask Question
-        </Link>
+        </button>
       </div>
+
       <div>
         {questionsList === null ? (
           <h1>Loading...</h1>
         ) : (
           <>
             <p>{questionsList.length} Questions</p>
+            <QuestionList questionsList={questionsList} />
           </>
         )}
       </div>
