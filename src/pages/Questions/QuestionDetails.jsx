@@ -105,12 +105,12 @@ const QuestionDetails = () => {
                           <p>{tag} </p>
                         ))}
                       </div>
-                      <div className="question-action-user">
+                      <div className="question-actions-user">
                         <div>
                           <button type="button">Share</button>
                           <button type="button">Delete</button>
                         </div>
-                        <div>
+                        <div className="ask">
                           <p>asked {question.askedOn}</p>
                           <Link
                             to={`/User/${question.userId}`}
