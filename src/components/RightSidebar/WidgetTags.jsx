@@ -23,7 +23,7 @@ const WidgetTags = () => {
       <h3>Watched Tags</h3>
       <div className="widget-tags-div">
         {tags.map((tag) => (
-          <p>{tag}</p>
+          <p key={tag}>{tag}</p>
         ))}
       </div>
     </div>
