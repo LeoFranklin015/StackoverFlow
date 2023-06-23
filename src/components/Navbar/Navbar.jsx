@@ -3,9 +3,17 @@ import { Link } from "react-router-dom";
 import logo from "../../assets/stackoverflow.png";
 import search from "../../assets/search.png";
 import Avatar from "../../components/Avatar/Avatar";
+import { useSelector, useDispatch } from "react-redux";
+import { setCurrentUser } from "../../actions/currentUser";
 import "./Navbar.css";
+import { useEffect } from "react";
 const Navbar = () => {
-  var user = null;
+  const dispatch = useDispatch();
+  var user = useSelector((state) => state.currentUserReducer);
+
+  useEffect(() => {
+    dispatch(setCurrentUser(JSON.parse(localStorage.getItem("Profile"))));
+  }, [dispatch]);
   return (
     <nav className="main-nav">
       <div className="navbar">
@@ -42,14 +50,14 @@ const Navbar = () => {
               color="lightblue"
             >
               <Link
-                to="/"
+                to="/Profile"
                 style={{
                   color: "white",
                   textDecoration: "none",
                   cursor: "pointer",
                 }}
               >
-                L
+                {user.result.name.charAt(0).toUpperCase()}
               </Link>
             </Avatar>
             <button className="nav-link">Logout</button>

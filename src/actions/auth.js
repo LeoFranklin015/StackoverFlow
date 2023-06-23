@@ -1,10 +1,11 @@
 import * as api from "../api/index";
+import { setCurrentUser } from "./currentUser";
 
 export const signup = (authData, navigate) => async (dispatch) => {
   try {
     const { data } = await api.signUp(authData);
     dispatch({ type: "AUTH", data });
-    navigate("/");
+    dispatch(setCurrentUser(JSON.parse(localStorage.getItem("Profile"))));
   } catch (error) {
     console.log(error.message);
   }
