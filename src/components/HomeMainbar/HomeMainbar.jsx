@@ -2,8 +2,16 @@ import React from "react";
 import "./HomeMainbar.css";
 import QuestionList from "./QuestionList";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { setCurrentUser } from "../../actions/currentUser";
+import { useEffect } from "react";
 const HomeMainbar = () => {
-  const user = null;
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.currentUserReducer);
+
+  useEffect(() => {
+    dispatch(setCurrentUser(JSON.parse(localStorage.getItem("Profile"))));
+  }, [dispatch]);
   const navigate = useNavigate();
   const location = useLocation();
 
