@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import copy from "copy-to-clipboard";
+import { useLocation } from "react-router-dom";
 import up from "../../assets/up.svg";
 import down from "../../assets/down.svg";
 import Avatar from "../../components/Avatar/Avatar";
@@ -45,6 +47,14 @@ const QuestionDetails = () => {
       }
     }
   };
+
+  const location = useLocation();
+  const url = "hhtp://localhost:3000";
+  const handleShare = () => {
+    copy(url + location.pathname);
+    alert(`Link copied \n url : ${url + location.pathname} `);
+  };
+
   return (
     <div className="question-detail-page">
       {questionsList.data === null ? (
@@ -83,7 +93,9 @@ const QuestionDetails = () => {
                       </div>
                       <div className="question-actions-user">
                         <div>
-                          <button type="button">Share</button>
+                          <button type="button" onClick={handleShare}>
+                            Share
+                          </button>
                           <button type="button">Delete</button>
                         </div>
                         <div className="ask">
