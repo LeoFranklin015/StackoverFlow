@@ -5,77 +5,80 @@ import down from "../../assets/down.svg";
 import Avatar from "../../components/Avatar/Avatar";
 import DisplayAnswer from "./DisplayAnswer";
 import "./Question.css";
+import { useSelector } from "react-redux";
 const QuestionDetails = () => {
   const { id } = useParams();
-  var questionsList = [
-    {
-      _id: "1",
-      upVotes: 3,
-      downVotes: 2,
-      noOfAnswers: 2,
-      questionTitle: "What is a function?",
-      questionBody: "It meant to be",
-      questionTags: ["java", "node js", "react js", "mongo db "],
-      userPosted: "mano",
-      userId: 1,
-      askedOn: "jan 1",
-      answer: [
-        {
-          answerBody: "Answer",
-          userAnswered: "kumar",
-          answeredOn: "jan 2",
-          userld: 2,
-        },
-      ],
-    },
-    {
-      _id: "2",
-      upVotes: 3,
-      downVotes: 2,
-      noOfAnswers: 2,
-      questionTitle: "What is a function?",
-      questionBody: "It meant to be",
-      questionTags: ["java", "node js", "react js", "mongo db "],
-      userPosted: "mano",
-      userId: 1,
-      askedOn: "jan 1",
-      answer: [
-        {
-          answerBody: "Answer",
-          userAnswered: "kumar",
-          answeredOn: "jan 2",
-          userld: 2,
-        },
-      ],
-    },
-    {
-      _id: "3",
-      upVotes: 3,
-      downVotes: 2,
-      noOfAnswers: 2,
-      questionTitle: "What is a function?",
-      questionBody: "It meant to be",
-      questionTags: ["java", "node js", "react js", "mongo db "],
-      userPosted: "mano",
-      userId: 1,
-      askedOn: "jan 1",
-      answer: [
-        {
-          answerBody: "Answer",
-          userAnswered: "kumar",
-          answeredOn: "jan 2",
-          userld: 2,
-        },
-      ],
-    },
-  ];
+
+  const questionsList = useSelector((state) => state.questionsReducer);
+  // var questionsList = [
+  //   {
+  //     _id: "1",
+  //     upVotes: 3,
+  //     downVotes: 2,
+  //     noOfAnswers: 2,
+  //     questionTitle: "What is a function?",
+  //     questionBody: "It meant to be",
+  //     questionTags: ["java", "node js", "react js", "mongo db "],
+  //     userPosted: "mano",
+  //     userId: 1,
+  //     askedOn: "jan 1",
+  //     answer: [
+  //       {
+  //         answerBody: "Answer",
+  //         userAnswered: "kumar",
+  //         answeredOn: "jan 2",
+  //         userld: 2,
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     _id: "2",
+  //     upVotes: 3,
+  //     downVotes: 2,
+  //     noOfAnswers: 2,
+  //     questionTitle: "What is a function?",
+  //     questionBody: "It meant to be",
+  //     questionTags: ["java", "node js", "react js", "mongo db "],
+  //     userPosted: "mano",
+  //     userId: 1,
+  //     askedOn: "jan 1",
+  //     answer: [
+  //       {
+  //         answerBody: "Answer",
+  //         userAnswered: "kumar",
+  //         answeredOn: "jan 2",
+  //         userld: 2,
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     _id: "3",
+  //     upVotes: 3,
+  //     downVotes: 2,
+  //     noOfAnswers: 2,
+  //     questionTitle: "What is a function?",
+  //     questionBody: "It meant to be",
+  //     questionTags: ["java", "node js", "react js", "mongo db "],
+  //     userPosted: "mano",
+  //     userId: 1,
+  //     askedOn: "jan 1",
+  //     answer: [
+  //       {
+  //         answerBody: "Answer",
+  //         userAnswered: "kumar",
+  //         answeredOn: "jan 2",
+  //         userld: 2,
+  //       },
+  //     ],
+  //   },
+  // ];
   return (
     <div className="question-detail-page">
-      {questionsList === null ? (
+      {questionsList.data === null ? (
         <h1>Loading...</h1>
       ) : (
         <>
-          {questionsList
+          {questionsList.data
             .filter((question) => question._id === id)
             .map((question) => (
               <div key={question._id}>
@@ -89,7 +92,7 @@ const QuestionDetails = () => {
                         width="20"
                         className="votes-icon"
                       />
-                      <p>{question.upVotes - question.downVotes}</p>
+                      <p>{question.upVote - question.downVote}</p>
                       <img
                         src={down}
                         alt="down-arrow"
