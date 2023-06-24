@@ -1,77 +1,50 @@
-import React from "react";
-import { Link, useParams } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import up from "../../assets/up.svg";
 import down from "../../assets/down.svg";
 import Avatar from "../../components/Avatar/Avatar";
 import DisplayAnswer from "./DisplayAnswer";
 import "./Question.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { postAnswer } from "../../actions/question";
+import { useEffect } from "react";
+import { setCurrentUser } from "../../actions/currentUser";
+import moment from "moment";
 const QuestionDetails = () => {
   const { id } = useParams();
 
   const questionsList = useSelector((state) => state.questionsReducer);
-  // var questionsList = [
-  //   {
-  //     _id: "1",
-  //     upVotes: 3,
-  //     downVotes: 2,
-  //     noOfAnswers: 2,
-  //     questionTitle: "What is a function?",
-  //     questionBody: "It meant to be",
-  //     questionTags: ["java", "node js", "react js", "mongo db "],
-  //     userPosted: "mano",
-  //     userId: 1,
-  //     askedOn: "jan 1",
-  //     answer: [
-  //       {
-  //         answerBody: "Answer",
-  //         userAnswered: "kumar",
-  //         answeredOn: "jan 2",
-  //         userld: 2,
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     _id: "2",
-  //     upVotes: 3,
-  //     downVotes: 2,
-  //     noOfAnswers: 2,
-  //     questionTitle: "What is a function?",
-  //     questionBody: "It meant to be",
-  //     questionTags: ["java", "node js", "react js", "mongo db "],
-  //     userPosted: "mano",
-  //     userId: 1,
-  //     askedOn: "jan 1",
-  //     answer: [
-  //       {
-  //         answerBody: "Answer",
-  //         userAnswered: "kumar",
-  //         answeredOn: "jan 2",
-  //         userld: 2,
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     _id: "3",
-  //     upVotes: 3,
-  //     downVotes: 2,
-  //     noOfAnswers: 2,
-  //     questionTitle: "What is a function?",
-  //     questionBody: "It meant to be",
-  //     questionTags: ["java", "node js", "react js", "mongo db "],
-  //     userPosted: "mano",
-  //     userId: 1,
-  //     askedOn: "jan 1",
-  //     answer: [
-  //       {
-  //         answerBody: "Answer",
-  //         userAnswered: "kumar",
-  //         answeredOn: "jan 2",
-  //         userld: 2,
-  //       },
-  //     ],
-  //   },
-  // ];
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [Answer, setAnswer] = useState("");
+
+  const user = useSelector((state) => state.currentUserReducer);
+
+  useEffect(() => {
+    dispatch(setCurrentUser(JSON.parse(localStorage.getItem("Profile"))));
+  }, [dispatch]);
+  const handlePostAnswer = (e, answerLength) => {
+    e.preventDefault();
+    if (user === null) {
+      alert("Login to Answer !");
+      navigate("/Auth");
+    } else {
+      if (Answer === "") {
+        alert(" Thw answer cant be empty !");
+      } else {
+        // const user1 = user.result.name;
+        // console.log(user1);
+        dispatch(
+          postAnswer({
+            id,
+            noOfAnswers: answerLength,
+            answerBody: Answer,
+            userAnswered: user.result.name,
+          })
+        );
+      }
+    }
+  };
   return (
     <div className="question-detail-page">
       {questionsList.data === null ? (
@@ -114,7 +87,7 @@ const QuestionDetails = () => {
                           <button type="button">Delete</button>
                         </div>
                         <div className="ask">
-                          <p>asked {question.askedOn}</p>
+                          <p>asked {moment(question.askedOn).fromNow()}</p>
                           <Link
                             to={`/User/${question.userId}`}
                             className="user-link"
@@ -137,8 +110,18 @@ const QuestionDetails = () => {
                 )}
                 <section className="post-ans-container">
                   <h3>Your Answer</h3>
-                  <form>
-                    <textarea name="" id="" cols="30" rows="10"></textarea>
+                  <form
+                    onSubmit={(e) =>
+                      handlePostAnswer(e, question.answer.length)
+                    }
+                  >
+                    <textarea
+                      name=""
+                      id=""
+                      cols="30"
+                      rows="10"
+                      onChange={(e) => setAnswer(e.target.value)}
+                    ></textarea>
                     <br />
                     <input
                       type="submit"
