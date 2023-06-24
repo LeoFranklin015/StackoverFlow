@@ -96,7 +96,9 @@ const QuestionDetails = () => {
                           <button type="button" onClick={handleShare}>
                             Share
                           </button>
-                          <button type="button">Delete</button>
+                          {user?.result?._id === question.userId && (
+                            <button type="button">Delete</button>
+                          )}
                         </div>
                         <div className="ask">
                           <p>asked {moment(question.askedOn).fromNow()}</p>
