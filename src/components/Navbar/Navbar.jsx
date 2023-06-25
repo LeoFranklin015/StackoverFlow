@@ -1,7 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import decode from "jwt-decode";
 import logo from "../../assets/stackoverflow.png";
 import search from "../../assets/search.png";
+
 import Avatar from "../../components/Avatar/Avatar";
 import { useSelector, useDispatch } from "react-redux";
 import { setCurrentUser } from "../../actions/currentUser";
@@ -10,10 +12,23 @@ import { useEffect } from "react";
 const Navbar = () => {
   const dispatch = useDispatch();
   var user = useSelector((state) => state.currentUserReducer);
-
+  const navigate = useNavigate();
   useEffect(() => {
+    const token = user?.token;
+    if (token) {
+      const decodedToken = decode(token);
+      if (decodedToken * 1000 < new Date().getTime()) {
+        handleLogut();
+      }
+    }
     dispatch(setCurrentUser(JSON.parse(localStorage.getItem("Profile"))));
   }, [dispatch]);
+
+  const handleLogut = () => {
+    dispatch({ type: "LOGOUT" });
+    navigate("/");
+    dispatch(setCurrentUser(null));
+  };
   return (
     <nav className="main-nav">
       <div className="navbar">
@@ -60,7 +75,9 @@ const Navbar = () => {
                 {user.result.name.charAt(0).toUpperCase()}
               </Link>
             </Avatar>
-            <button className="nav-link">Logout</button>
+            <button className="nav-link" onClick={handleLogut}>
+              Logout
+            </button>
           </>
         )}
       </div>
