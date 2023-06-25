@@ -8,7 +8,11 @@ import Avatar from "../../components/Avatar/Avatar";
 import DisplayAnswer from "./DisplayAnswer";
 import "./Question.css";
 import { useDispatch, useSelector } from "react-redux";
-import { postAnswer, deleteQuestion } from "../../actions/question";
+import {
+  postAnswer,
+  deleteQuestion,
+  voteQuestion,
+} from "../../actions/question";
 import { useEffect } from "react";
 import { setCurrentUser } from "../../actions/currentUser";
 import moment from "moment";
@@ -61,6 +65,14 @@ const QuestionDetails = () => {
     dispatch(deleteQuestion(id, navigate));
   };
 
+  const handleUpVote = () => {
+    dispatch(voteQuestion(id, "upvote", user.result._id));
+  };
+
+  const handleDownVote = () => {
+    dispatch(voteQuestion(id, "downvote", user.result._id));
+  };
+
   return (
     <div className="question-detail-page">
       {questionsList.data === null ? (
@@ -80,13 +92,15 @@ const QuestionDetails = () => {
                         alt="up-arrow"
                         width="20"
                         className="votes-icon"
+                        onClick={handleUpVote}
                       />
-                      <p>{question.upVote - question.downVote}</p>
+                      <p>{question.upVote.length - question.downVote.length}</p>
                       <img
                         src={down}
                         alt="down-arrow"
                         width="20"
                         className="votes-icon"
+                        onClick={handleDownVote}
                       />
                     </div>
 
