@@ -1,14 +1,24 @@
 import React from "react";
 import moment from "moment";
 import copy from "copy-to-clipboard";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import Avatar from "../../components/Avatar/Avatar";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteAnswer } from "../../actions/question";
 const DisplayAnswer = ({ question }) => {
   const location = useLocation();
+  const dispatch = useDispatch();
+  const { id } = useParams();
   const url = "hhtp://localhost:3000";
+
+  const user = useSelector((state) => state.currentUserReducer);
   const handleShare = () => {
     copy(url + location.pathname);
     alert(`Link copied \n url : ${url + location.pathname} `);
+  };
+
+  const handleDelete = (answerId, noOfAnswers) => {
+    dispatch(deleteAnswer(id, answerId, noOfAnswers));
   };
   return (
     <div>
@@ -20,7 +30,14 @@ const DisplayAnswer = ({ question }) => {
               <button type="button" onClick={handleShare}>
                 Share
               </button>
-              <button type="button">Delete</button>
+              {user?.result?._id === ans.userId && (
+                <button
+                  type="button"
+                  onClick={() => handleDelete(ans._id, question.noOfAnswers)}
+                >
+                  Delete
+                </button>
+              )}
             </div>
             <div>
               <p>answered {moment(ans.answeredOn).fromNow()}</p>

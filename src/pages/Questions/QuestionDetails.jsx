@@ -43,7 +43,7 @@ const QuestionDetails = () => {
             noOfAnswers: answerLength,
             answerBody: Answer,
             userAnswered: user.result.name,
-            userId: user?.result?._id,
+            userId: user.result?._id,
           })
         );
       }
