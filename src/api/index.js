@@ -1,5 +1,4 @@
 import axios from "axios";
-import { json } from "react-router-dom";
 
 const API = axios.create({ baseURL: "http://localhost:4000" });
 
@@ -30,3 +29,5 @@ export const postAnswer = (id, noOfAnswers, answerBody, userAnswered, userId) =>
     userAnswered,
     userId,
   });
+
+export const fetcAllUsers = () => API.get("/user/getAllUser");
