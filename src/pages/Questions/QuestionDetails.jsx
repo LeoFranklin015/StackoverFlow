@@ -8,10 +8,11 @@ import Avatar from "../../components/Avatar/Avatar";
 import DisplayAnswer from "./DisplayAnswer";
 import "./Question.css";
 import { useDispatch, useSelector } from "react-redux";
-import { postAnswer } from "../../actions/question";
+import { postAnswer, deleteQuestion } from "../../actions/question";
 import { useEffect } from "react";
 import { setCurrentUser } from "../../actions/currentUser";
 import moment from "moment";
+
 const QuestionDetails = () => {
   const { id } = useParams();
 
@@ -42,6 +43,7 @@ const QuestionDetails = () => {
             noOfAnswers: answerLength,
             answerBody: Answer,
             userAnswered: user.result.name,
+            userId: user?.result?._id,
           })
         );
       }
@@ -53,6 +55,10 @@ const QuestionDetails = () => {
   const handleShare = () => {
     copy(url + location.pathname);
     alert(`Link copied \n url : ${url + location.pathname} `);
+  };
+
+  const handleDelete = () => {
+    dispatch(deleteQuestion(id, navigate));
   };
 
   return (
@@ -97,7 +103,9 @@ const QuestionDetails = () => {
                             Share
                           </button>
                           {user?.result?._id === question.userId && (
-                            <button type="button">Delete</button>
+                            <button type="button" onClick={handleDelete}>
+                              Delete
+                            </button>
                           )}
                         </div>
                         <div className="ask">
