@@ -8,7 +8,12 @@ export const signUp = (authData) => API.post("/user/signup ", authData);
 export const postQuestion = (questionData) =>
   API.post("/questions/Ask", questionData);
 export const getAllQuestions = () => API.get("/questions/get");
+export const deleteQuestion = (id) => API.delete(`/questions/delete/${id}`);
+export const voteQuestion = (id, value, userId) =>
+  API.patch(`/questions/vote/${id}`, { value, userId });
 
+export const deleteAnswer = (id, answerId, noOfAnswers) =>
+  API.patch(`/answer/delete/${id}`, { answerId, noOfAnswers });
 export const postAnswer = (id, noOfAnswers, answerBody, userAnswered, userId) =>
   API.patch(`/answer/post/${id}`, {
     noOfAnswers,
@@ -16,8 +21,3 @@ export const postAnswer = (id, noOfAnswers, answerBody, userAnswered, userId) =>
     userAnswered,
     userId,
   });
-
-export const deleteQuestion = (id) => API.delete(`/questions/delete/${id}`);
-
-export const deleteAnswer = (id, answerId, noOfAnswers) =>
-  API.patch(`/answer/delete/${id}`, { answerId, noOfAnswers });
