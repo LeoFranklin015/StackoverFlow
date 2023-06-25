@@ -1,9 +1,11 @@
 import React from "react";
+import "./Tags.css";
 
-const TagsList = () => {
+const TagsList = ({ tag }) => {
   return (
-    <div>
-      <h1>tags</h1>
+    <div className="tag">
+      <h5>{tag.tagName}</h5>
+      <p>{tag.tagDesc}</p>
     </div>
   );
 };
