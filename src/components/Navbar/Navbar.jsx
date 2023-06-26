@@ -65,7 +65,7 @@ const Navbar = () => {
               color="lightblue"
             >
               <Link
-                to="/Profile"
+                to={`/Users/${user.result._id}`}
                 style={{
                   color: "white",
                   textDecoration: "none",
