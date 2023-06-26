@@ -31,3 +31,6 @@ export const postAnswer = (id, noOfAnswers, answerBody, userAnswered, userId) =>
   });
 
 export const fetcAllUsers = () => API.get("/user/getAllUser");
+
+export const updateProfile = (id, updateData) =>
+  API.patch(`/user/update/${id}`, updateData);
