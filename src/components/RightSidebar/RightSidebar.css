@@ -24,7 +24,6 @@
 .right-sidebar-div-1 {
   background-color: #fdf7e2;
   padding: 5px;
-  /* border: solid 1px #f1e5bc; */
 }
 
 .right-sidebar-div-1 .right-sidebar-div-2 {
@@ -73,4 +72,10 @@
   background-color: #e1ecf4;
   color: #39739d;
   border-radius: 2px;
+}
+
+@media screen and (max-width: 1020px) {
+  .right-sidebar {
+    display: none;
+  }
 }

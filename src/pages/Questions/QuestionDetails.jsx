@@ -55,7 +55,7 @@ const QuestionDetails = () => {
   };
 
   const location = useLocation();
-  const url = "hhtp://localhost:3000";
+  const url = "https://stackoverflow-basic.netlify.app";
   const handleShare = () => {
     copy(url + location.pathname);
     alert(`Link copied \n url : ${url + location.pathname} `);
