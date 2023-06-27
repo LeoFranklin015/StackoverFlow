@@ -21,8 +21,8 @@ const UserProfile = ({ slideIn, handleSlideIn }) => {
 
   return (
     <div className="home-container-1">
-      <LeftSidebar slideIn={slideIn} handleSlideIn={handleSlideIn} />
-      <div className="home-container-2">
+      <LeftSidebar />
+      <div className="home-container-3">
         <section>
           <div className="user-details-container">
             <div className="user-details">
