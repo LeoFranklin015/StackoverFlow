@@ -1,8 +1,6 @@
 import axios from "axios";
 
-const API = axios.create({
-  baseURL: "https://stackoverflow-fo3t.onrender.com",
-});
+const API = axios.create({ baseURL: "http://localhost:4000" });
 
 API.interceptors.request.use((req) => {
   if (localStorage.getItem("Profile")) {
@@ -36,3 +34,6 @@ export const fetcAllUsers = () => API.get("/user/getAllUser");
 
 export const updateProfile = (id, updateData) =>
   API.patch(`/user/update/${id}`, updateData);
+
+// export const updateSubscription = (id, data) =>
+//   API.patch(`user/subscribe/${id}`, data);

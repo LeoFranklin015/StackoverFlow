@@ -98,6 +98,7 @@ const HomeMainbar = () => {
         ) : (
           <h1>All Questions</h1>
         )}
+        {/* <button>Subscription</button> */}
         <button onClick={checkAuth} className="ask-btn">
           Ask Question
         </button>
