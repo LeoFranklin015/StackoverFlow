@@ -9,6 +9,7 @@ import DisplayQuestions from "./pages/Questions/DisplayQuestions";
 import Tags from "./pages/Tags/Tags";
 import Users from "./pages/Users/Users";
 import UserProfile from "./pages/UserProfile/UserProfile";
+import Subscribe from "./pages/Subscribe/Subscribe";
 const AllRoutes = ({ slideIn, handleSlideIn }) => {
   return (
     <Routes>
@@ -50,6 +51,7 @@ const AllRoutes = ({ slideIn, handleSlideIn }) => {
           <UserProfile slideIn={slideIn} handleSlideIn={handleSlideIn} />
         }
       ></Route>
+      <Route path="/Subscribe" element={<Subscribe />}></Route>
     </Routes>
   );
 };

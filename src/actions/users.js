@@ -17,11 +17,11 @@ export const updateProfile = (id, updateData) => async (dispatch) => {
   }
 };
 
-// export const updateSubscription = (id, data) => async (dispatch) => {
-//   try {
-//     const { SubscribeData } = await api.updateSubscription(id, data);
-//     dispatch({ type: "UPDATE_SUBSCRIPTION", payload: SubscribeData });
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+export const updateSubscription = (id, data) => async (dispatch) => {
+  try {
+    const { SubscribeData } = await api.updateSubscription(id, data);
+    dispatch({ type: "UPDATE_SUBSCRIPTION", payload: SubscribeData });
+  } catch (error) {
+    console.log(error);
+  }
+};

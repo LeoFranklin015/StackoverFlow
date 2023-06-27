@@ -28,6 +28,19 @@
   background-color: #0086d8;
 }
 
+.ask-btn-1 {
+  text-decoration: none;
+  /* margin-left: 350px; */
+  border-radius: 4px;
+  padding: 10px 15px;
+  background-color: #ef8236;
+  color: white;
+  transition: 0.3s;
+}
+
+.ask-btn-1:hover {
+  background-color: #efad7d;
+}
 .display-question-container {
   min-height: 80px;
   display: flex;
