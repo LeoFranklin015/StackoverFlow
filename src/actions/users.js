@@ -25,3 +25,26 @@ export const updateSubscription = (id, data) => async (dispatch) => {
     console.log(error);
   }
 };
+
+// export const updatePayment =
+//   ({ name, email, paymentMethod }) =>
+//   async (dispatch) => {
+//     try {
+//       const response = await api.updatePayment({ name, email, paymentMethod });
+//       dispatch({ type: "UPDATE_PAYMENT_SUCCESS", payload: response });
+//       return response;
+//     } catch (err) {
+//       console.log(err);
+//     }
+//   };
+
+export const updatePayment = (name, email, paymentMethod) => {
+  return async () => {
+    try {
+      const response = await api.subscribe(name, email, paymentMethod);
+      return response;
+    } catch (err) {
+      throw err;
+    }
+  };
+};

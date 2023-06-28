@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentUser } from "../../actions/currentUser";
 import { Elements } from "@stripe/react-stripe-js";
@@ -16,11 +16,21 @@ const Subscribe = () => {
     "pk_test_51NNVFQSFLmZqb4QYkR7ceOim49rqacqZxgLT6BzdNIX6LfJsD4cnyGmDRKNvKp6CEs7pj8hMnAJ2SG20QJJE3Ov400V7YfO5sU"
   );
 
+  const [showPaymentForm, setShowPaymentForm] = useState(false);
+  const handleGold = () => {
+    setShowPaymentForm(!showPaymentForm);
+  };
+
   return (
     <div>
-      <Elements stripe={stripePromise}>
-        <PaymentForm />
-      </Elements>
+      <button onClick={handleGold} style={{ marginTop: "100px" }}>
+        GOLD
+      </button>
+      {showPaymentForm && (
+        <Elements stripe={stripePromise}>
+          <PaymentForm />
+        </Elements>
+      )}
     </div>
   );
 };

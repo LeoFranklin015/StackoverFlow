@@ -40,3 +40,24 @@ export const updateProfile = (id, updateData) =>
 
 export const updateSubscription = (id, data) =>
   API.patch(`user/subscribe/${id}`, data);
+
+export const updatePayment = ({ name, email, paymentMethod }) =>
+  API.post("/user/payment", { name, email, paymentMethod });
+
+export const subscribe = async (name, email, paymentMethod) => {
+  try {
+    const response = await API.post("/user/payment", {
+      name,
+      email,
+      paymentMethod,
+    });
+
+    if (response.status !== 200) {
+      throw new Error("Payment unsuccessful!");
+    }
+
+    return response.data;
+  } catch (err) {
+    throw err;
+  }
+};
