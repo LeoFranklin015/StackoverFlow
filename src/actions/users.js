@@ -17,26 +17,16 @@ export const updateProfile = (id, updateData) => async (dispatch) => {
   }
 };
 
-export const updateSubscription = (id, data) => async (dispatch) => {
+export const updateSubscription = (id, type) => async (dispatch) => {
+  console.log(id);
   try {
-    const { SubscribeData } = await api.updateSubscription(id, data);
+    const { SubscribeData } = await api.updateSubscription({ id, type });
+
     dispatch({ type: "UPDATE_SUBSCRIPTION", payload: SubscribeData });
   } catch (error) {
     console.log(error);
   }
 };
-
-// export const updatePayment =
-//   ({ name, email, paymentMethod }) =>
-//   async (dispatch) => {
-//     try {
-//       const response = await api.updatePayment({ name, email, paymentMethod });
-//       dispatch({ type: "UPDATE_PAYMENT_SUCCESS", payload: response });
-//       return response;
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   };
 
 export const updatePayment = (name, email, paymentMethod, productId) => {
   return async () => {

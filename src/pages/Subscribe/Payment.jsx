@@ -1,7 +1,7 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { updatePayment } from "../../actions/users";
+import { useDispatch, useSelector } from "react-redux";
+import { updatePayment, updateSubscription } from "../../actions/users";
 
 function PaymentForm({ productId }) {
   const [name, setName] = useState("");
@@ -9,6 +9,9 @@ function PaymentForm({ productId }) {
   const stripe = useStripe();
   const elements = useElements();
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.currentUserReducer);
+  const id = user.result._id;
+  console.log(user.result._id);
 
   const createSubscription = async () => {
     try {
@@ -31,7 +34,9 @@ function PaymentForm({ productId }) {
       }
       if (productId === "prod_O9pjsBVkDvAtrb") {
         alert("GOLD MEMBERSHIP");
+        dispatch(updateSubscription(user.result._id, "GOLD"));
       } else {
+        dispatch(updateSubscription(user.result._id, "PLATINUM"));
         alert("PLATINUM MEMBERSHIP");
       }
 

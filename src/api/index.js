@@ -38,8 +38,7 @@ export const fetcAllUsers = () => API.get("/user/getAllUser");
 export const updateProfile = (id, updateData) =>
   API.patch(`/user/update/${id}`, updateData);
 
-export const updateSubscription = (id, data) =>
-  API.patch(`user/subscribe/${id}`, data);
+export const updateSubscription = (data) => API.patch("/user/subscribe", data);
 
 export const updatePayment = ({ name, email, paymentMethod }) =>
   API.post("/user/payment", { name, email, paymentMethod });
