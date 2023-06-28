@@ -72,7 +72,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { updatePayment } from "../../actions/users";
 
-function PaymentForm({ product }) {
+function PaymentForm({ productId }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const stripe = useStripe();
@@ -87,7 +87,7 @@ function PaymentForm({ product }) {
       });
 
       const response = await dispatch(
-        updatePayment(name, email, paymentMethod.paymentMethod.id)
+        updatePayment(name, email, paymentMethod.paymentMethod.id, productId)
       );
 
       if (!response) {
@@ -124,7 +124,7 @@ function PaymentForm({ product }) {
       <br />
       <CardElement />
       <br />
-      <button onClick={createSubscription}>Subscribe - 5 INR</button>
+      <button onClick={createSubscription}>Subscribe </button>
     </div>
   );
 }

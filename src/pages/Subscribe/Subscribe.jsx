@@ -16,19 +16,32 @@ const Subscribe = () => {
     "pk_test_51NNVFQSFLmZqb4QYkR7ceOim49rqacqZxgLT6BzdNIX6LfJsD4cnyGmDRKNvKp6CEs7pj8hMnAJ2SG20QJJE3Ov400V7YfO5sU"
   );
 
-  const [showPaymentForm, setShowPaymentForm] = useState(false);
+  const [showPaymentFormGold, setShowPaymentFormGold] = useState(false);
   const handleGold = () => {
-    setShowPaymentForm(!showPaymentForm);
+    setShowPaymentFormGold(!showPaymentFormGold);
+    setShowPaymentFormPlatinum(false);
   };
-
+  const [showPaymentFormPlatinum, setShowPaymentFormPlatinum] = useState(false);
+  const handlePlatinum = () => {
+    setShowPaymentFormPlatinum(!showPaymentFormPlatinum);
+    setShowPaymentFormGold(false);
+  };
   return (
-    <div>
+    <div style={{ padding: "10px", margin: "10px" }}>
       <button onClick={handleGold} style={{ marginTop: "100px" }}>
         GOLD
       </button>
-      {showPaymentForm && (
+      <button onClick={handlePlatinum} style={{ marginTop: "100px" }}>
+        Platinum
+      </button>
+      {showPaymentFormGold && (
         <Elements stripe={stripePromise}>
-          <PaymentForm />
+          <PaymentForm productId={"prod_O9pjsBVkDvAtrb"} />
+        </Elements>
+      )}
+      {showPaymentFormPlatinum && (
+        <Elements stripe={stripePromise}>
+          <PaymentForm productId={"prod_O9q8GjzCtGxnD4"} />
         </Elements>
       )}
     </div>

@@ -38,10 +38,15 @@ export const updateSubscription = (id, data) => async (dispatch) => {
 //     }
 //   };
 
-export const updatePayment = (name, email, paymentMethod) => {
+export const updatePayment = (name, email, paymentMethod, productId) => {
   return async () => {
     try {
-      const response = await api.subscribe(name, email, paymentMethod);
+      const response = await api.subscribe(
+        name,
+        email,
+        paymentMethod,
+        productId
+      );
       return response;
     } catch (err) {
       throw err;

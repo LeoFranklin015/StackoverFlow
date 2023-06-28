@@ -44,12 +44,13 @@ export const updateSubscription = (id, data) =>
 export const updatePayment = ({ name, email, paymentMethod }) =>
   API.post("/user/payment", { name, email, paymentMethod });
 
-export const subscribe = async (name, email, paymentMethod) => {
+export const subscribe = async (name, email, paymentMethod, productId) => {
   try {
     const response = await API.post("/user/payment", {
       name,
       email,
       paymentMethod,
+      productId,
     });
 
     if (response.status !== 200) {
