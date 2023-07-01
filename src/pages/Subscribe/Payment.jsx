@@ -11,7 +11,7 @@ function PaymentForm({ productId }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.currentUserReducer);
   const id = user.result._id;
-  console.log(user.result._id);
+  // console.log(user.result._id);
 
   const createSubscription = async () => {
     try {

@@ -8,6 +8,7 @@ export const fetchAllUsers = () => async (dispatch) => {
     console.log(error);
   }
 };
+
 export const updateProfile = (id, updateData) => async (dispatch) => {
   try {
     const { data } = await api.updateProfile(id, updateData);
@@ -18,15 +19,22 @@ export const updateProfile = (id, updateData) => async (dispatch) => {
 };
 
 export const updateSubscription = (id, type) => async (dispatch) => {
-  console.log(id);
   try {
-    const { SubscribeData } = await api.updateSubscription({ id, type });
-
-    dispatch({ type: "UPDATE_SUBSCRIPTION", payload: SubscribeData });
+    const { data } = await api.updateSubscription({ id, type });
+    dispatch({ type: "UPDATE_SUBSCRIPTION", payload: data });
   } catch (error) {
     console.log(error);
   }
 };
+
+// export const updateSubscription = (id, type) => async (dispatch) => {
+//   try {
+//     const { SubscribeData } = await api.updateSubscription({ id, type });
+//     dispatch({ type: "UPDATE_SUBSCRIPTION", payload: SubscribeData });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 export const updatePayment = (name, email, paymentMethod, productId) => {
   return async () => {
@@ -42,4 +50,13 @@ export const updatePayment = (name, email, paymentMethod, productId) => {
       throw err;
     }
   };
+};
+
+export const updateCurrentUser = (updateData) => async (dispatch) => {
+  try {
+    const data = await api.currentUsers(updateData);
+    dispatch({ type: "CURRENT_USER", payload: data });
+  } catch (error) {
+    console.log(error);
+  }
 };

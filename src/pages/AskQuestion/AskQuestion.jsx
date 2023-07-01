@@ -1,126 +1,111 @@
-// import React, { useState } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import { useNavigate } from "react-router-dom";
-// import { askQuestion } from "../../actions/question";
-// import "./AskQuestion.css";
-// const AskQuestion = () => {
-//   const dispatch = useDispatch();
-//   const user = useSelector((state) => state.currentUserReducer);
-//   const navigate = useNavigate();
-//   const [Title, setTitle] = useState("");
-//   const [Body, setBody] = useState("");
-//   const [Tags, setTags] = useState([]);
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     console.log({ Title, Body, Tags });
-//     dispatch(
-//       askQuestion({ Title, Body, Tags, userPosted: user.result.name }, navigate)
-//     );
-//   };
-
-//   const handleKey = (e) => {
-//     if (e.key === "Enter") {
-//       setBody(Body + "\n");
-//     }
-//   };
-//   return (
-//     <div className="ask-question">
-//       <div className="ask-ques-container">
-//         <h1>Ask a Public Question</h1>
-//         <form onSubmit={handleSubmit}>
-//           <div className="ask-form-container">
-//             <label htmlFor="ask-ques-title">
-//               <h4>Title</h4>
-//               <p>
-//                 Be specific and imagine you’re asking a question to another
-//                 person.
-//               </p>
-//               <input
-//                 type="text "
-//                 name="questionTitle"
-//                 id="ask-ques-title"
-//                 placeholder="eg : Is there a R function for finding the index of an element in a vector?'/"
-//                 onChange={(e) => setTitle(e.target.value)}
-//               />
-//             </label>
-//             <label htmlFor="ask-ques-body">
-//               <h4>Body</h4>
-//               <p>
-//                 Introduce the problem and expand on what you put in the title.
-//                 Minimum 20 characters.
-//               </p>
-//               <textarea
-//                 name="questionBody"
-//                 id="ask-ques-body"
-//                 cols="30"
-//                 rows="10"
-//                 onChange={(e) => setBody(e.target.value)}
-//                 onKeyPress={handleKey}
-//               ></textarea>
-//             </label>
-//             <label htmlFor="ask-ques-tags">
-//               <h4>Tags</h4>
-//               <p>
-//                 Add up to 5 tags to describe what your question is about. Start
-//                 typing to see suggestions.
-//               </p>
-//               <input
-//                 type="text "
-//                 name="questionTags"
-//                 id="ask-ques-tags"
-//                 placeholder="eg : reactJs, NodeJs , Python , Java"
-//                 onChange={(e) => setTags(e.target.value.split(" "))}
-//               />
-//             </label>
-//           </div>
-//           <input
-//             type="submit"
-//             value="Review Your Question"
-//             className="review-btn"
-//           ></input>
-//         </form>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default AskQuestion;
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
+import { setCurrentUser } from "../../actions/currentUser";
 import "./AskQuestion.css";
-import { askQuestion } from "../../actions/question";
 
+import { askQuestion } from "../../actions/question";
+import { updateCurrentUser } from "../../actions/users";
+import { getUserData } from "../../actions/updatedUser";
+import { fetchAllUsers } from "../../actions/users";
 const AskQuestion = () => {
   const [questionTitle, setQuestionTitle] = useState("");
   const [questionBody, setQuestionBody] = useState("");
   const [questionTags, setQuestionTags] = useState("");
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchAllUsers());
+  }, [dispatch]);
+
   const User = useSelector((state) => state.currentUserReducer);
+  const users = useSelector((state) => state.usersReducer);
+  const currentProfile = users.filter(
+    (user) => user._id === User.result._id
+  )[0];
+
+  // useEffect(() => {
+  //   dispatch(setCurrentUser(JSON.parse(localStorage.getItem("Profile"))));
+  // }, [dispatch]);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const [lastPostedDate, setLastPostedDate] = useState(
+    currentProfile?.lastPostedDate
+  );
+  const [noOfQuestionsPosted, setNoOfQuestionsPosted] = useState(
+    currentProfile.noOfQuestionsPosted
+  );
+
+  useEffect(() => {
+    const currentDate = new Date();
+
+    const currentDateString = currentDate.toDateString();
+    console.log(noOfQuestionsPosted);
+    if (currentDateString !== lastPostedDate) {
+      setLastPostedDate(currentDateString);
+      setNoOfQuestionsPosted(0);
+    }
+  }, [lastPostedDate, noOfQuestionsPosted]);
+
+  ////
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (User) {
-      if (questionTitle && questionBody && questionTags) {
-        dispatch(
-          askQuestion(
-            {
-              questionTitle,
-              questionBody,
-              questionTags,
-              userPosted: User.result.name,
-              userId: User?.result._id,
-            },
-            navigate
-          )
+      console.log(currentProfile.noOfQuestionsPosted);
+      if (
+        currentProfile.subscription === "Free" &&
+        currentProfile.noOfQuestionsPosted >= 1
+      ) {
+        alert(
+          "FREE membership can post only one Question a day! \n Try upgrading your membership"
         );
-      } else alert("Please enter all the fields");
-    } else alert("Login to ask question");
+      } else if (
+        currentProfile.subscription === "GOLD" &&
+        noOfQuestionsPosted >= 5
+      ) {
+        alert(
+          "GOLD membership can post only 5 Questions a day! \n Try upgrading your membership"
+        );
+      } else {
+        if (questionTitle && questionBody && questionTags) {
+          const ans = currentProfile.noOfQuestionsPosted + 1;
+          setNoOfQuestionsPosted(ans);
+
+          const updatedUser = {
+            id: User?.result._id,
+            noOfQuestionsPosted: ans,
+            lastPostedDate: lastPostedDate,
+          };
+
+          try {
+            dispatch(updateCurrentUser(updatedUser));
+            console.log("User updated successfully in MongoDB");
+          } catch (error) {
+            console.log("Error updating user in MongoDB: ", error);
+          }
+          dispatch(getUserData(User?.result._id));
+          dispatch(
+            askQuestion(
+              {
+                questionTitle,
+                questionBody,
+                questionTags,
+                userPosted: User?.result.name,
+                userId: User?.result._id,
+              },
+              navigate
+            )
+          );
+        } else {
+          alert("Please enter all the fields");
+        }
+      }
+    } else {
+      alert("Login to ask a question");
+    }
   };
 
   const handleEnter = (e) => {

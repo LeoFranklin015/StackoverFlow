@@ -1,17 +1,16 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
-import LeftSidebar from "../../components/LeftSidebar/LeftSidebar";
-import "./Users.css";
-import UserList from "./UserList";
-const Users = () => {
-  const location = useLocation();
 
+import "./Users.css";
+import LeftSidebar from "../../components/LeftSidebar/LeftSidebar";
+import UsersList from "./UserList";
+
+const Users = () => {
   return (
     <div className="home-container-1">
       <LeftSidebar />
       <div className="home-container-3" style={{ marginTop: "30px" }}>
         <h1 style={{ fontWeight: "400" }}>Users</h1>
-        <UserList />
+        <UsersList />
       </div>
     </div>
   );

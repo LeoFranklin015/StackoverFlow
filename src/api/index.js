@@ -61,3 +61,37 @@ export const subscribe = async (name, email, paymentMethod, productId) => {
     throw err;
   }
 };
+
+export const currentUsers = async ({
+  id,
+  noOfQuestionsPosted,
+  lastPostedDate,
+}) => {
+  return API.patch(`/user/currentUser/${id}`, {
+    noOfQuestionsPosted,
+    lastPostedDate,
+  });
+};
+
+// export const getUser = async (id) => {
+//   return API.get("/user/getUser", id);
+// };
+
+export const getUser = async (id) => {
+  try {
+    const response = await API.get(`/user/getUser/${id}`);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getUserData = async (userId) => {
+  try {
+    const response = await API.get(`/user/getUser/${userId}`);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};

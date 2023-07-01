@@ -5,11 +5,13 @@ import questionsReducer from "./questions";
 import usersReducer from "./users";
 import paymentReducer from "./payment";
 import subscriptionReducer from "./subscription";
+import updatedUserReducer from "./userDetails";
 export default combineReducers({
   authReducer,
   currentUserReducer,
   questionsReducer,
   usersReducer,
-  // paymentReducer,
-  // subscriptionReducer,
+  paymentReducer,
+  subscriptionReducer,
+  updatedUserReducer,
 });
