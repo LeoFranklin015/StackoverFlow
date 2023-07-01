@@ -42,7 +42,7 @@ const AskQuestion = () => {
 
     const currentDateString = currentDate.toDateString();
     console.log(noOfQuestionsPosted);
-    if (currentDateString !== lastPostedDate) {
+    if (currentDateString !== currentProfile?.lastPostedDate) {
       setLastPostedDate(currentDateString);
       setNoOfQuestionsPosted(0);
     }
@@ -64,7 +64,7 @@ const AskQuestion = () => {
         );
       } else if (
         currentProfile.subscription === "GOLD" &&
-        noOfQuestionsPosted >= 5
+        currentProfile.noOfQuestionsPosted >= 5
       ) {
         alert(
           "GOLD membership can post only 5 Questions a day! \n Try upgrading your membership"
