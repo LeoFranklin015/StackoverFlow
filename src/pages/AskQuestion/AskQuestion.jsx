@@ -34,44 +34,53 @@ const AskQuestion = () => {
     currentProfile?.lastPostedDate
   );
   const [noOfQuestionsPosted, setNoOfQuestionsPosted] = useState(
-    currentProfile.noOfQuestionsPosted
+    currentProfile?.noOfQuestionsPosted
   );
 
-  useEffect(() => {
-    const currentDate = new Date();
+  // useEffect(() => {
+  //   const currentDate = new Date();
+  //   const currentDateString = currentDate.toDateString();
 
-    const currentDateString = currentDate.toDateString();
-    console.log(noOfQuestionsPosted);
-    if (currentDateString !== currentProfile?.lastPostedDate) {
-      setLastPostedDate(currentDateString);
-      setNoOfQuestionsPosted(0);
-    }
-  }, [lastPostedDate, noOfQuestionsPosted]);
+  //   console.log(currentDateString);
+  //   console.log(lastPostedDate);
+  //   if (currentDateString !== currentProfile?.lastPostedDate) {
+  //     setLastPostedDate(currentDateString);
+  //     setNoOfQuestionsPosted(0);
+  //   }
+  // }, [lastPostedDate, noOfQuestionsPosted]);
 
   ////
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (currentProfile) {
+      const currentDate = new Date();
+      const currentDateString = currentDate.toDateString();
+      if (currentDateString > currentProfile?.lastPostedDate) {
+        setLastPostedDate(currentDateString);
+        setNoOfQuestionsPosted(0);
+      }
+      console.log(currentDateString);
+      console.log(lastPostedDate);
+      console.log(noOfQuestionsPosted);
+    }
 
     if (User) {
-      console.log(currentProfile.noOfQuestionsPosted);
-      if (
-        currentProfile.subscription === "Free" &&
-        currentProfile.noOfQuestionsPosted >= 1
-      ) {
+      if (currentProfile.subscription === "Free" && noOfQuestionsPosted >= 1) {
         alert(
           "FREE membership can post only one Question a day! \n Try upgrading your membership"
         );
       } else if (
         currentProfile.subscription === "GOLD" &&
-        currentProfile.noOfQuestionsPosted >= 5
+        currentProfile?.noOfQuestionsPosted >= 5
       ) {
+        console.log(noOfQuestionsPosted);
         alert(
           "GOLD membership can post only 5 Questions a day! \n Try upgrading your membership"
         );
       } else {
         if (questionTitle && questionBody && questionTags) {
-          const ans = currentProfile.noOfQuestionsPosted + 1;
+          const ans = noOfQuestionsPosted + 1;
           setNoOfQuestionsPosted(ans);
 
           const updatedUser = {
@@ -86,7 +95,7 @@ const AskQuestion = () => {
           } catch (error) {
             console.log("Error updating user in MongoDB: ", error);
           }
-          dispatch(getUserData(User?.result._id));
+          // dispatch(getUserData(User?.result._id));
           dispatch(
             askQuestion(
               {
