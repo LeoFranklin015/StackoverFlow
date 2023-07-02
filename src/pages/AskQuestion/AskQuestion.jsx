@@ -70,6 +70,7 @@ const AskQuestion = () => {
         alert(
           "FREE membership can post only one Question a day! \n Try upgrading your membership"
         );
+        navigate("/Subscribe");
       } else if (
         currentProfile.subscription === "GOLD" &&
         currentProfile?.noOfQuestionsPosted >= 5
@@ -78,6 +79,7 @@ const AskQuestion = () => {
         alert(
           "GOLD membership can post only 5 Questions a day! \n Try upgrading your membership"
         );
+        navigate("/Subscribe");
       } else {
         if (questionTitle && questionBody && questionTags) {
           const ans = noOfQuestionsPosted + 1;

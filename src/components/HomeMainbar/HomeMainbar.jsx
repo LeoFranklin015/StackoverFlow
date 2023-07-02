@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setCurrentUser } from "../../actions/currentUser";
 import { useEffect, useState } from "react";
+import { fetchAllUsers } from "../../actions/users";
 const HomeMainbar = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.currentUserReducer);
@@ -15,7 +16,9 @@ const HomeMainbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   ////////
-
+  useEffect(() => {
+    dispatch(fetchAllUsers());
+  }, [dispatch]);
   // const [lastPostedDate, setLastPostedDate] = useState(
   //   user?.result.lastPostedDate
   // );
