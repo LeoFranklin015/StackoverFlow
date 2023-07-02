@@ -50,20 +50,27 @@ const AskQuestion = () => {
   // }, [lastPostedDate, noOfQuestionsPosted]);
 
   ////
-
+  useEffect(() => {
+    const currentDate = new Date();
+    const currentDateString = currentDate.toDateString();
+    if (currentDateString > currentProfile?.lastPostedDate) {
+      setLastPostedDate(currentDateString);
+      setNoOfQuestionsPosted(0);
+    }
+  }, [currentProfile?.lastPostedDate]);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (currentProfile) {
-      const currentDate = new Date();
-      const currentDateString = currentDate.toDateString();
-      if (currentDateString > currentProfile?.lastPostedDate) {
-        setLastPostedDate(currentDateString);
-        setNoOfQuestionsPosted(0);
-      }
-      console.log(currentDateString);
-      console.log(lastPostedDate);
-      console.log(noOfQuestionsPosted);
-    }
+    // if (currentProfile) {
+    //   const currentDate = new Date();
+    //   const currentDateString = currentDate.toDateString();
+    //   if (currentDateString > currentProfile?.lastPostedDate) {
+    //     setLastPostedDate(currentDateString);
+    //     setNoOfQuestionsPosted(0);
+    //   }
+
+    //   // console.log(currentDateString);
+    //   console.log(lastPostedDate);
+    // }
 
     if (User) {
       if (currentProfile.subscription === "Free" && noOfQuestionsPosted >= 1) {
@@ -73,7 +80,7 @@ const AskQuestion = () => {
         navigate("/Subscribe");
       } else if (
         currentProfile.subscription === "GOLD" &&
-        currentProfile?.noOfQuestionsPosted >= 5
+        noOfQuestionsPosted >= 5
       ) {
         console.log(noOfQuestionsPosted);
         alert(
@@ -81,6 +88,7 @@ const AskQuestion = () => {
         );
         navigate("/Subscribe");
       } else {
+        console.log(noOfQuestionsPosted);
         if (questionTitle && questionBody && questionTags) {
           const ans = noOfQuestionsPosted + 1;
           setNoOfQuestionsPosted(ans);
