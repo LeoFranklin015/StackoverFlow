@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setCurrentUser } from "../../actions/currentUser";
 import "./AskQuestion.css";
-
+import moment from "moment";
 import { askQuestion } from "../../actions/question";
 import { updateCurrentUser } from "../../actions/users";
 import { getUserData } from "../../actions/updatedUser";
@@ -52,10 +52,15 @@ const AskQuestion = () => {
   ////
   useEffect(() => {
     const currentDate = new Date();
+    // const currentYear = currentDate.getFullYear();
+    // const currentMonth = currentDate.getMonth();
+    // const currentDay = currentDate.getDate();
+    const curdate = moment(currentDate);
     const currentDateString = currentDate.toDateString();
-    if (currentDateString > currentProfile?.lastPostedDate) {
+    if (curdate.diff(moment(currentProfile?.lastPostedDate), "days") > 0) {
       setLastPostedDate(currentDateString);
       setNoOfQuestionsPosted(0);
+      console.log(curdate.diff(moment(currentProfile?.lastPostedDate), "days"));
     }
   }, [currentProfile?.lastPostedDate]);
   const handleSubmit = async (e) => {
