@@ -1,4 +1,11 @@
-import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import {
+  CardElement,
+  useElements,
+  useStripe,
+  CardNumberElement,
+  CardCvcElement,
+  CardExpiryElement,
+} from "@stripe/react-stripe-js";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updatePayment, updateSubscription } from "../../actions/users";
@@ -16,7 +23,7 @@ function PaymentForm({ productId }) {
   const createSubscription = async () => {
     try {
       const paymentMethod = await stripe.createPaymentMethod({
-        card: elements.getElement("card"),
+        card: elements.getElement(CardNumberElement),
         type: "card",
       });
 
@@ -68,26 +75,43 @@ function PaymentForm({ productId }) {
             style={{ width: "70%", height: "25px", fontSize: "14px" }}
           />
         </div>
-        <div className="card-element">
-          Card Details:{" "}
-          <CardElement
-            options={{
-              style: {
-                base: {
-                  fontSize: "16px",
-                  padding: "25px",
-                  color: "black",
-                  "::placeholder": {
-                    color: "black",
-                  },
-                },
-                invalid: {
-                  color: "#9e2146",
-                },
-              },
-            }}
-          />
+        <div className="form-row">
+          <label htmlFor="card-number">Card Number</label>
+          <div id="card-number" className="card-element">
+            <CardNumberElement
+              options={
+                {
+                  /* Element options */
+                }
+              }
+            />
+          </div>
         </div>
+        <div className="form-row">
+          <label htmlFor="card-expiry">Expiration Date</label>
+          <div id="card-expiry" className="card-element">
+            <CardExpiryElement
+              options={
+                {
+                  /* Element options */
+                }
+              }
+            />
+          </div>
+        </div>
+        <div className="form-row">
+          <label htmlFor="card-cvc">CVC</label>
+          <div id="card-cvc" className="card-element">
+            <CardCvcElement
+              options={
+                {
+                  /* Element options */
+                }
+              }
+            />
+          </div>
+        </div>
+
         <div>
           <button onClick={createSubscription} className="subscribe">
             Subscribe
