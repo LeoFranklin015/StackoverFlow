@@ -2,7 +2,7 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updatePayment, updateSubscription } from "../../actions/users";
-
+import "./Payment.css";
 function PaymentForm({ productId }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -48,24 +48,52 @@ function PaymentForm({ productId }) {
   };
 
   return (
-    <div style={{ width: "40%", marginTop: "100px" }}>
-      Name:{" "}
-      <input
-        type="text"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <br />
-      Email:{" "}
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <br />
-      <CardElement />
-      <br />
-      <button onClick={createSubscription}>Subscribe </button>
+    <div className="payment-form-container" style={{ padding: "10px" }}>
+      <div className="card-container">
+        <div className="input-field">
+          Name:{" "}
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            style={{ width: "70%", height: "25px", fontSize: "14px" }}
+          />
+        </div>
+        <div className="input-field">
+          Email:{" "}
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            style={{ width: "70%", height: "25px", fontSize: "14px" }}
+          />
+        </div>
+        <div className="card-element">
+          Card Details:{" "}
+          <CardElement
+            options={{
+              style: {
+                base: {
+                  fontSize: "16px",
+                  padding: "25px",
+                  color: "black",
+                  "::placeholder": {
+                    color: "black",
+                  },
+                },
+                invalid: {
+                  color: "#9e2146",
+                },
+              },
+            }}
+          />
+        </div>
+        <div>
+          <button onClick={createSubscription} className="subscribe">
+            Subscribe
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
