@@ -73,7 +73,7 @@ const ProfileCard = ({ location }) => {
       ) : (
         <span>
           <Link
-            to={`/profile/${user.result._id}`}
+            to={`/Socio/profile/${user.result._id}`}
             style={{ textDecoration: "none", color: "inherit" }}
           >
             My Profile

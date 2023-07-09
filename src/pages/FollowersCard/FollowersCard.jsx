@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./FollowersCard.css";
 import { getAllUser, searchUser } from "../../api/index";
+import FollowersModal from "../FollowersModal/FollowersModal";
 import User from "../User/User";
 
 import { useSelector } from "react-redux";
@@ -31,11 +32,10 @@ const FollowersCard = ({ location }) => {
       ) : (
         ""
       )}
-      {/*
-        <FollowersModal
-          modalOpened={modalOpened}
-          setModalOpened={setModalOpened}
-        /> */}
+      <FollowersModal
+        modalOpened={modalOpened}
+        setModalOpened={setModalOpened}
+      />
     </div>
   );
 };

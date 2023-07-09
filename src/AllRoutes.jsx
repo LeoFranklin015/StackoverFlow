@@ -11,6 +11,7 @@ import Users from "./pages/Users/Users";
 import UserProfile from "./pages/UserProfile/UserProfile";
 import Subscribe from "./pages/Subscribe/Subscribe";
 import Socio from "./pages/Socio/Socio";
+import Profile from "./pages/Profile/Profile";
 const AllRoutes = ({ slideIn, handleSlideIn }) => {
   return (
     <Routes>
@@ -46,9 +47,12 @@ const AllRoutes = ({ slideIn, handleSlideIn }) => {
         path="/Users"
         element={<Users slideIn={slideIn} handleSlideIn={handleSlideIn} />}
       ></Route>
-      <Route path="/Socio" element={<Socio />}></Route>
+
       <Route path="/Users/:id" element={<UserProfile />}></Route>
       <Route path="/Subscribe" element={<Subscribe />}></Route>
+
+      <Route path="/Socio" element={<Socio />}></Route>
+      <Route path="/Socio/profile/:id" element={<Profile />}></Route>
     </Routes>
   );
 };

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Logo from "../../assets/icon.png";
 import "./LogoSearch.css";
 import { UilSearch } from "@iconscout/react-unicons";
-// import SearchModal from "../SearchModal/SearchModal";
+import SearchModal from "../SearchModal/SearchModal";
 const LogoSearch = () => {
   const [modalOpened, setModalOpened] = useState(false);
 
@@ -17,10 +17,10 @@ const LogoSearch = () => {
             setModalOpened(true);
           }}
         />
-        {/* <SearchModal
+        <SearchModal
           modalOpened={modalOpened}
           setModalOpened={setModalOpened}
-        /> */}
+        />
 
         <div className="s-icon">
           <UilSearch />
