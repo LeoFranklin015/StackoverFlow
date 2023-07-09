@@ -8,7 +8,7 @@ const FollowersCard = ({ location }) => {
   const [modalOpened, setModalOpened] = useState(false);
 
   const [persons, setPersons] = useState([]);
-  const { user } = useSelector((state) => state.authReducer.authData);
+  const user = useSelector((state) => state.authReducer.authData);
   const [data, setData] = useState([]);
   useEffect(() => {
     const fetchPersons = async () => {
@@ -18,11 +18,13 @@ const FollowersCard = ({ location }) => {
     fetchPersons();
   }, []);
 
+  console.log(persons);
   return (
     <div className="FollowersCard">
       <h3>People you may know</h3>;
       {persons.map((person, id) => {
-        if (person._id !== user._id) return <User person={person} key={id} />;
+        if (person._id !== user.result._id)
+          return <User person={person} key={id} />;
       })}
       {!location ? (
         <span onClick={() => setModalOpened(true)}>Show more</span>

@@ -110,12 +110,13 @@ export const uploadImage = (data) => API.post("/upload/post", data);
 export const uploadPost = (data) => API.post("/post/createPost", data);
 
 //user
-export const getUser = (userId) => API.get(`/user/${userId}`);
+export const getUser = (userId) => API.get(`/usersocio/${userId}`);
 export const updateUser = (id, formData) =>
-  API.patch(`/user/update/${id}`, formData);
-export const getAllUser = () => API.get("/user");
-export const followUser = (id, data) => API.patch(`/user/${id}/follow`, data);
+  API.patch(`/usersocio/update/${id}`, formData);
+export const getAllUser = () => API.get("/usersocio");
+export const followUser = (id, data) =>
+  API.patch(`/usersocio/${id}/follow`, data);
 export const unfollowUser = (id, data) =>
-  API.patch(`/user/${id}/unfollow`, data);
+  API.patch(`/usersocio/${id}/unfollow`, data);
 
 export const searchUser = (data) => API.get("/search", data);

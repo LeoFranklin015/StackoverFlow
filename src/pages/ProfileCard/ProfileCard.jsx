@@ -55,7 +55,10 @@ const ProfileCard = ({ location }) => {
               <div className="vl"></div>
               <div className="follow">
                 <span>
-                  {posts.filter((post) => post.userId === user._id).length}
+                  {
+                    posts.filter((post) => post.userId === user.result._id)
+                      .length
+                  }
                 </span>
                 <span>Posts</span>
               </div>{" "}
@@ -70,7 +73,7 @@ const ProfileCard = ({ location }) => {
       ) : (
         <span>
           <Link
-            to={`/profile/${user._id}`}
+            to={`/profile/${user.result._id}`}
             style={{ textDecoration: "none", color: "inherit" }}
           >
             My Profile
