@@ -63,7 +63,7 @@ const authReducer = (
           ...state.authData,
           user: {
             ...state.authData.user,
-            following: [...state.authData.user.following, action.data],
+            following: [...state.authData.result.following, action.data],
           },
         },
       };
@@ -76,7 +76,7 @@ const authReducer = (
           user: {
             ...state.authData.user,
             following: [
-              ...state.authData.user.following.filter(
+              ...state.authData.result.following.filter(
                 (personId) => personId !== action.data
               ),
             ],

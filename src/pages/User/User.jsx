@@ -10,9 +10,10 @@ const User = ({ person }) => {
     person.followers.includes(user.result._id)
   );
   const handleFollow = () => {
+    console.log(user.result);
     following
-      ? dispatch(unfollowUser(person._id, user))
-      : dispatch(followUser(person._id, user));
+      ? dispatch(unfollowUser(person._id, user.result))
+      : dispatch(followUser(person._id, user.result));
     setFollowing((prev) => !prev);
   };
   return (
