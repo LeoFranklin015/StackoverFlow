@@ -49,15 +49,15 @@
 
 import React, { useState } from "react";
 import "./Post.css";
-import Comment from "../../Assets/message-regular.svg";
-import Share from "../../Assets/paper-plane-regular.svg";
-import Heart from "../../Assets/heart-solid.svg";
-import NotLike from "../../Assets/heart-regular.svg";
-import { likePost } from "../../api/PostRequests";
+import Comment from "../../assets/message-regular.svg";
+import Share from "../../assets/paper-plane-regular.svg";
+import Heart from "../../assets/heart-solid.svg";
+import NotLike from "../../assets/heart-regular.svg";
+import { likePost } from "../../api/index";
 import { useSelector } from "react-redux";
 
 const Post = ({ data }) => {
-  const { user } = useSelector((state) => state.authReducer.authData);
+  const user = useSelector((state) => state.authReducer.authData);
   const [liked, setLiked] = useState(data.likes.includes(user._id));
   const [likes, setLikes] = useState(data.likes.length);
 

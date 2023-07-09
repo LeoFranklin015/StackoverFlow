@@ -11,8 +11,9 @@ import {
 } from "redux";
 
 import thunk from "redux-thunk";
+import store from "./Store/ReduxStore";
 
-const store = createStore(Reducers, compose(applyMiddleware(thunk)));
+// const store = createStore(Reducers, compose(applyMiddleware(thunk)));
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>

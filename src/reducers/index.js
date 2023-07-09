@@ -6,6 +6,7 @@ import usersReducer from "./users";
 import paymentReducer from "./payment";
 import subscriptionReducer from "./subscription";
 import updatedUserReducer from "./userDetails";
+import postReducer from "./PostReducer";
 export default combineReducers({
   authReducer,
   currentUserReducer,
@@ -14,4 +15,5 @@ export default combineReducers({
   paymentReducer,
   subscriptionReducer,
   updatedUserReducer,
+  postReducer,
 });

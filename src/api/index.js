@@ -95,3 +95,16 @@ export const getUserData = async (userId) => {
     throw error;
   }
 };
+
+//socio
+
+//post
+
+export const getTimelinePosts = (id) => API.get(`/post/${id}/timeline`);
+export const likePost = (id, userId) =>
+  API.patch(`post/${id}/like`, { userId: userId });
+
+//upload
+
+export const uploadImage = (data) => API.post("/upload/post", data);
+export const uploadPost = (data) => API.post("/post/createPost", data);
