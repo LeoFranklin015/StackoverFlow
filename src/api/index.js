@@ -77,14 +77,14 @@ export const currentUsers = async ({
 //   return API.get("/user/getUser", id);
 // };
 
-export const getUser = async (id) => {
-  try {
-    const response = await API.get(`/user/getUser/${id}`);
-    return response;
-  } catch (error) {
-    console.log(error);
-  }
-};
+// export const getUser = async (id) => {
+//   try {
+//     const response = await API.get(`/user/getUser/${id}`);
+//     return response;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 export const getUserData = async (userId) => {
   try {
@@ -108,3 +108,14 @@ export const likePost = (id, userId) =>
 
 export const uploadImage = (data) => API.post("/upload/post", data);
 export const uploadPost = (data) => API.post("/post/createPost", data);
+
+//user
+export const getUser = (userId) => API.get(`/user/${userId}`);
+export const updateUser = (id, formData) =>
+  API.patch(`/user/update/${id}`, formData);
+export const getAllUser = () => API.get("/user");
+export const followUser = (id, data) => API.patch(`/user/${id}/follow`, data);
+export const unfollowUser = (id, data) =>
+  API.patch(`/user/${id}/unfollow`, data);
+
+export const searchUser = (data) => API.get("/search", data);
