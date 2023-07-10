@@ -1,8 +1,21 @@
 import React from "react";
 import "./LeftSidebar.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Globe from "../../assets/globe.png";
+import { useSelector } from "react-redux";
+
 const LeftSidebar = () => {
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.authReducer.authData);
+  const handleSocio = (e) => {
+    e.preventDefault();
+    if (!user) {
+      alert("Login first to enter socio");
+      navigate("/Auth/");
+    } else {
+      navigate("/socio");
+    }
+  };
   return (
     <div className="left-sidebar">
       <nav className="side-nav">
@@ -43,6 +56,7 @@ const LeftSidebar = () => {
             className="side-nav-links"
             activeClassName="active"
             style={{ paddingLeft: "30px" }}
+            onClick={handleSocio}
           >
             <p style={{ paddingLeft: "25px" }}>Socio</p>
           </NavLink>
