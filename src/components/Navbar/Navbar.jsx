@@ -9,6 +9,7 @@ import Avatar from "../../components/Avatar/Avatar";
 import "./Navbar.css";
 import { setCurrentUser } from "../../actions/currentUser";
 import bars from "../../assets/bars-solid.svg";
+import { logout } from "../../actions/auth";
 
 const Navbar = ({ handleSlideIn }) => {
   const dispatch = useDispatch();
@@ -16,7 +17,8 @@ const Navbar = ({ handleSlideIn }) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    dispatch({ type: "LOGOUT" });
+    dispatch(logout());
+
     navigate("/");
     dispatch(setCurrentUser(null));
   };
