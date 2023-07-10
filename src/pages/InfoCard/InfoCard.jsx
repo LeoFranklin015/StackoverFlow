@@ -22,7 +22,7 @@ const InfoCard = () => {
   useEffect(() => {
     const fetchProfileUser = async () => {
       if (profileUserId === user.result._id) {
-        setProfileUser(user);
+        setProfileUser(user.result);
       } else {
         console.log("fetching");
         const profileUser = await UserApi.getUser(profileUserId);
@@ -47,7 +47,7 @@ const InfoCard = () => {
             <ProfileModal
               modalOpened={modalOpened}
               setModalOpened={setModalOpened}
-              data={user}
+              data={user.result}
             />
           </div>
         ) : (
@@ -56,28 +56,47 @@ const InfoCard = () => {
       </div>
 
       <div className="info">
-        {/* */}
         <span>
-          <b>Status </b>
+          <b>Username </b>
         </span>
-        <span>{profileUser.relationship}</span>
+        <span style={{ color: "gray", paddingLeft: "5px" }}>
+          {profileUser.username}
+        </span>
+      </div>
+
+      <div className="info">
+        <span>
+          <b>Firstname </b>
+        </span>
+        <span style={{ color: "gray", paddingLeft: "5px" }}>
+          {profileUser.firstname}
+        </span>
+      </div>
+      <div className="info">
+        <span>
+          <b>Lastname </b>
+        </span>
+        <span style={{ color: "gray", paddingLeft: "5px" }}>
+          {profileUser.lastname}
+        </span>
       </div>
       <div className="info">
         <span>
           <b>Lives in </b>
         </span>
-        <span>{profileUser.livesIn}</span>
+        <span style={{ color: "gray", paddingLeft: "5px" }}>
+          {profileUser.livesIn}
+        </span>
       </div>
+
       <div className="info">
         <span>
           <b>Works at </b>
         </span>
-        <span>{profileUser.worksAt}</span>
+        <span style={{ color: "gray", paddingLeft: "5px" }}>
+          {profileUser.worksAt}
+        </span>
       </div>
-
-      <button className="button logout-button" onClick={handleLogOut}>
-        Log Out
-      </button>
     </div>
   );
 };

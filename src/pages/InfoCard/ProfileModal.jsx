@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Modal, useMantineTheme } from "@mantine/core";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { uploadImage } from "../../actions/UploadAction";
 import { updateUser } from "../../actions/UserAction";
@@ -9,13 +9,14 @@ import { updateUser } from "../../actions/UserAction";
 const ProfileModal = ({ modalOpened, setModalOpened, data }) => {
   const theme = useMantineTheme();
   const { password, ...other } = data;
+
   const [formData, setFormData] = useState(other);
   const [profileImage, setProfileImage] = useState(null);
   const [coverImage, setCoverImage] = useState(null);
   const dispatch = useDispatch();
   const param = useParams();
 
-  // const { user } = useSelector((state) => state.authReducer.authData);
+  const user = useSelector((state) => state.authReducer.authData);
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -33,12 +34,16 @@ const ProfileModal = ({ modalOpened, setModalOpened, data }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     let UserData = formData;
+    console.log(formData);
     if (profileImage) {
       const data = new FormData();
+
       const fileName = Date.now() + profileImage.name;
+
       data.append("name", fileName);
       data.append("file", profileImage);
       UserData.profilePicture = fileName;
+      console.log(data);
       try {
         dispatch(uploadImage(data));
       } catch (err) {
@@ -57,7 +62,8 @@ const ProfileModal = ({ modalOpened, setModalOpened, data }) => {
         console.log(err);
       }
     }
-    dispatch(updateUser(param.id, UserData));
+
+    dispatch(updateUser(user.result._id, UserData));
     setModalOpened(false);
   };
 
@@ -76,6 +82,16 @@ const ProfileModal = ({ modalOpened, setModalOpened, data }) => {
     >
       <form className="infoForm" onSubmit={handleSubmit}>
         <h3>Your Info</h3>
+        <div>
+          <input
+            value={formData.username}
+            onChange={handleChange}
+            type="text"
+            placeholder="Username"
+            name="username"
+            className="infoInput"
+          />
+        </div>
         <div>
           <input
             value={formData.firstname}
@@ -114,25 +130,6 @@ const ProfileModal = ({ modalOpened, setModalOpened, data }) => {
             placeholder="Lives in"
             name="livesIn"
             className="infoInput"
-          />
-          <input
-            value={formData.country}
-            onChange={handleChange}
-            type="text"
-            placeholder="Country"
-            name="country"
-            className="infoInput"
-          />
-        </div>
-
-        <div>
-          <input
-            value={formData.relationship}
-            onChange={handleChange}
-            type="text"
-            className="infoInput"
-            placeholder="Relationship status"
-            name="relationship"
           />
         </div>
 

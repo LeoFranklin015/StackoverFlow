@@ -14,7 +14,7 @@ const ProfileCard = ({ location }) => {
         <img
           src={
             user.result.coverPicture
-              ? serverPublic + user.coverPicture
+              ? serverPublic + user.result.coverPicture
               : serverPublic + "defaultCover.jpg"
           }
           alt="CoverImage"
@@ -22,7 +22,7 @@ const ProfileCard = ({ location }) => {
         <img
           src={
             user.result.profilePicture
-              ? serverPublic + user.profilePicture
+              ? serverPublic + user.result.profilePicture
               : serverPublic + "defaultProfile.png"
           }
           alt="ProfileImage"
@@ -30,7 +30,7 @@ const ProfileCard = ({ location }) => {
       </div>
       <div className="ProfileName">
         <span>
-          {user.firstname} {user.lastname}
+          {user.result.firstname} {user.result.lastname}
         </span>
         <span>
           {user.result.worksAt ? user.result.worksAt : "Write about yourself"}
