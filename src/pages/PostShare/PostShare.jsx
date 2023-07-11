@@ -7,6 +7,7 @@ import { UilSchedule } from "@iconscout/react-unicons";
 import { UilTimes } from "@iconscout/react-unicons";
 import { useDispatch, useSelector } from "react-redux";
 import { uploadImage, uploadPost } from "../../actions/UploadAction";
+import { postcloud } from "../../api";
 
 const PostShare = () => {
   const dispatch = useDispatch();
@@ -27,7 +28,7 @@ const PostShare = () => {
 
   const imageRef = useRef();
 
-  // handle post upload
+  //handle post
   const handleUpload = async (e) => {
     e.preventDefault();
 
@@ -39,16 +40,16 @@ const PostShare = () => {
 
     // if there is an image with post
     if (image) {
-      const data = new FormData();
-      const fileName = Date.now() + image.name;
-      data.append("name", fileName);
-      data.append("file", image);
-      newPost.image = fileName;
-      console.log(newPost);
+      const formdata = new FormData();
+      formdata.append("file", image);
+      formdata.append("upload_preset", "user_posts");
       try {
-        dispatch(uploadImage(data));
-      } catch (err) {
-        console.log(err);
+        const response = await postcloud(formdata);
+        newPost.image = response.data.url;
+        console.log(response.data.url);
+        console.log(newPost);
+      } catch (error) {
+        console.log(error);
       }
     }
     dispatch(uploadPost(newPost));
@@ -65,7 +66,7 @@ const PostShare = () => {
       <img
         src={
           user.profilePicture
-            ? serverPublic + user.profilePicture
+            ? user.profilePicture
             : serverPublic + "defaultProfile.png"
         }
         alt="Profile"

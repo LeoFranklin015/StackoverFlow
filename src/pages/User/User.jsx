@@ -22,7 +22,7 @@ const User = ({ person }) => {
         <img
           src={
             publicFolder + person.profilePicture
-              ? publicFolder + person.profilePicture
+              ? person.profilePicture
               : publicFolder + "defaultProfile.png"
           }
           alt="profile"
