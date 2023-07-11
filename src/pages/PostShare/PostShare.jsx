@@ -45,7 +45,7 @@ const PostShare = () => {
   //handle post
   const handleUpload = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     //post data
     const newPost = {
       userId: user.result._id,

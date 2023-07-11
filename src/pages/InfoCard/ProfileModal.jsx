@@ -10,7 +10,7 @@ import { postcloud } from "../../api";
 const ProfileModal = ({ modalOpened, setModalOpened, data }) => {
   const theme = useMantineTheme();
   const { password, ...other } = data;
-
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState(other);
   const [profileImage, setProfileImage] = useState(null);
   const [coverImage, setCoverImage] = useState(null);
@@ -34,6 +34,7 @@ const ProfileModal = ({ modalOpened, setModalOpened, data }) => {
   // form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     let UserData = formData;
     if (profileImage) {
       const formdata = new FormData();
@@ -64,8 +65,10 @@ const ProfileModal = ({ modalOpened, setModalOpened, data }) => {
         console.log(error);
       }
     }
-    dispatch(updateUser(param.id, UserData));
-    setModalOpened(false);
+    dispatch(updateUser(param.id, UserData)).then(() => {
+      setLoading(false);
+      setModalOpened(false);
+    });
   };
 
   return (
@@ -142,7 +145,7 @@ const ProfileModal = ({ modalOpened, setModalOpened, data }) => {
         </div>
 
         <button className="button infoButton" type="submit">
-          Update
+          {loading ? "Updating..." : "Update"}
         </button>
       </form>
     </Modal>

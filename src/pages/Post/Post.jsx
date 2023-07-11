@@ -33,6 +33,7 @@ const Post = ({ data }) => {
             width: "100%",
             borderRadius: "0.5rem",
             height: "fit-content",
+            justifyContent: "center",
           }}
         />
       ) : (
