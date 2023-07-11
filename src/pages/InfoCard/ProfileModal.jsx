@@ -3,8 +3,9 @@ import { Modal, useMantineTheme } from "@mantine/core";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { uploadImage } from "../../actions/UploadAction";
+
 import { updateUser } from "../../actions/UserAction";
+import { postcloud } from "../../api";
 
 const ProfileModal = ({ modalOpened, setModalOpened, data }) => {
   const theme = useMantineTheme();
@@ -31,39 +32,39 @@ const ProfileModal = ({ modalOpened, setModalOpened, data }) => {
   };
 
   // form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let UserData = formData;
-    console.log(formData);
     if (profileImage) {
-      const data = new FormData();
-
-      const fileName = Date.now() + profileImage.name;
-
-      data.append("name", fileName);
-      data.append("file", profileImage);
-      UserData.profilePicture = fileName;
-      console.log(data);
+      const formdata = new FormData();
+      formdata.append("file", profileImage);
+      formdata.append("upload_preset", "user_profile");
       try {
-        dispatch(uploadImage(data));
-      } catch (err) {
-        console.log(err);
+        const response = await postcloud(formdata);
+        UserData.profilePicture = response.data.url;
+        console.log(response.data.url);
+        setModalOpened(false);
+      } catch (error) {
+        console.log(error);
       }
     }
     if (coverImage) {
       const data = new FormData();
-      const fileName = Date.now() + coverImage.name;
-      data.append("name", fileName);
+
       data.append("file", coverImage);
-      UserData.coverPicture = fileName;
+      data.append("upload_preset", "user_cover");
+
       try {
-        dispatch(uploadImage(data));
-      } catch (err) {
-        console.log(err);
+        const response = await postcloud(data);
+
+        UserData.coverPicture = response.data.url;
+        console.log(response.data.url);
+        setModalOpened(false);
+      } catch (error) {
+        console.log(error);
       }
     }
-
-    dispatch(updateUser(user.result._id, UserData));
+    dispatch(updateUser(param.id, UserData));
     setModalOpened(false);
   };
 
