@@ -19,7 +19,22 @@
   align-items: center;
   justify-content: center;
 }
+/* .video video {
+  margin-top: 20px;
+  width: 100%;
+  height: fit-content;
+  max-height: 30rem;
 
+  object-fit: contain;
+  border-radius: 0.5rem;
+  background-color: var(--inputColor);
+  align-items: center;
+  justify-content: center;
+} */
+
+.video video {
+  align-self: center;
+}
 .postReact {
   display: flex;
   align-items: flex-start;

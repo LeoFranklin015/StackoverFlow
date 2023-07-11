@@ -6,6 +6,7 @@ import Heart from "../../assets/heart-solid.svg";
 import NotLike from "../../assets/heart-regular.svg";
 import { likePost } from "../../api/index";
 import { useSelector } from "react-redux";
+import ReactPlayer from "react-player";
 
 const Post = ({ data }) => {
   const user = useSelector((state) => state.authReducer.authData);
@@ -17,9 +18,26 @@ const Post = ({ data }) => {
     setLiked((prev) => !prev);
     liked ? setLikes(likes - 1) : setLikes(likes + 1);
   };
+  const bgcolor = `rgba(40, 52, 62, 0.07)`;
   return (
     <div className="Post">
-      <img src={data.image ? data.image : ""} alt="" />
+      {data.image ? (
+        <img src={data.image} alt="" />
+      ) : data.video ? (
+        <ReactPlayer
+          url={data.video}
+          controls={true}
+          style={{
+            alignSelf: "center",
+            backgroundColor: "lightgray",
+            width: "100%",
+            borderRadius: "0.5rem",
+            height: "fit-content",
+          }}
+        />
+      ) : (
+        <h5>{data.desc}</h5>
+      )}
 
       <div className="postReact">
         <img
@@ -35,12 +53,16 @@ const Post = ({ data }) => {
       <span style={{ color: "var(--gray)", fontSize: "12px" }}>
         {likes} likes
       </span>
-      <div className="detail">
-        <span>
-          <b>{data.name} </b>
-        </span>
-        <span>{data.desc}</span>
-      </div>
+      {data.image || data.video ? (
+        <div className="detail">
+          <span>
+            <b>{data.name} </b>
+          </span>
+          <span>{data.desc}</span>
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

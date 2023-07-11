@@ -7,15 +7,20 @@ import { UilSchedule } from "@iconscout/react-unicons";
 import { UilTimes } from "@iconscout/react-unicons";
 import { useDispatch, useSelector } from "react-redux";
 import { uploadImage, uploadPost } from "../../actions/UploadAction";
-import { postcloud } from "../../api";
+import { postcloud, postvideocloud } from "../../api";
+import ReactPlayer from "react-player";
 
 const PostShare = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.authReducer.authData);
   console.log(user);
-  const loading = useSelector((state) => state.postReducer.uploading);
+
   const [image, setImage] = useState(null);
-  const desc = useRef();
+  const [video, setVideo] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const [desc, setDesc] = useState("");
+
   const serverPublic = process.env.REACT_APP_PUBLIC_FOLDER;
 
   // handle Image Change
@@ -26,7 +31,16 @@ const PostShare = () => {
     }
   };
 
+  //handle video change
+  const onVideoChange = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      let vid = event.target.files[0];
+      setVideo(vid);
+    }
+  };
+
   const imageRef = useRef();
+  const videoRef = useRef();
 
   //handle post
   const handleUpload = async (e) => {
@@ -35,7 +49,7 @@ const PostShare = () => {
     //post data
     const newPost = {
       userId: user.result._id,
-      desc: desc.current.value,
+      desc: desc,
     };
 
     // if there is an image with post
@@ -52,14 +66,33 @@ const PostShare = () => {
         console.log(error);
       }
     }
-    dispatch(uploadPost(newPost));
-    resetShare();
+    if (video) {
+      const formdata = new FormData();
+      formdata.append("file", video);
+      formdata.append("upload_preset", "user_posts");
+      try {
+        const response = await postvideocloud(formdata);
+        newPost.video = response.data.url;
+        console.log(response.data.url);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    if (image || video || desc) {
+      dispatch(uploadPost(newPost)).then(() => {
+        setLoading(false); // Set loading state to false after successful dispatch
+        resetShare();
+      });
+    } else {
+      alert("Enter a image or video or text to share....");
+      setLoading(false);
+    }
   };
 
   // Reset Post Share
   const resetShare = () => {
     setImage(null);
-    desc.current.value = "";
+    setDesc("");
   };
   return (
     <div className="PostShare">
@@ -76,7 +109,7 @@ const PostShare = () => {
           type="text"
           placeholder="What's happening?"
           required
-          ref={desc}
+          onChange={(e) => setDesc(e.target.value)}
         />
         <div className="postOptions">
           <div
@@ -88,7 +121,11 @@ const PostShare = () => {
             Photo
           </div>
 
-          <div className="option" style={{ color: "var(--video)" }}>
+          <div
+            className="option"
+            style={{ color: "var(--video)" }}
+            onClick={() => videoRef.current.click()}
+          >
             <UilPlayCircle />
             Video
           </div>
@@ -111,12 +148,34 @@ const PostShare = () => {
           <div style={{ display: "none" }}>
             <input type="file" ref={imageRef} onChange={onImageChange} />
           </div>
+          <div style={{ display: "none" }}>
+            <input type="file" ref={videoRef} onChange={onVideoChange} />
+          </div>
         </div>
 
         {image && (
           <div className="previewImage">
             <UilTimes onClick={() => setImage(null)} />
             <img src={URL.createObjectURL(image)} alt="preview" />
+          </div>
+        )}
+        {video && (
+          <div className="previewImage">
+            <UilTimes
+              onClick={() => setVideo(null)}
+              style={{
+                color: "red",
+                padding: "2px",
+                backgroundColor: "white",
+                borderRadius: "50%",
+              }}
+            />
+
+            <ReactPlayer
+              url={URL.createObjectURL(video)}
+              controls={true}
+              alt="preview"
+            />
           </div>
         )}
       </div>
