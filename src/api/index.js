@@ -120,3 +120,6 @@ export const unfollowUser = (id, data) =>
   API.patch(`/usersocio/${id}/unfollow`, data);
 
 export const searchUser = (data) => API.get("/search", data);
+
+export const postcloud = (data) =>
+  axios.post("https://api.cloudinary.com/v1_1/djl0e0ryv/image/upload", data);
