@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Modal, useMantineTheme } from "@mantine/core";
-import FollowersCard from "../FollowersCard/FollowersCard";
 
 import User from "../User/User";
-import axios from "axios";
+
 import { getAllUser } from "../../api/index";
 
 const SearchModal = ({ modalOpened, setModalOpened }) => {
@@ -14,12 +13,12 @@ const SearchModal = ({ modalOpened, setModalOpened }) => {
   useEffect(() => {
     const fetchPersons = async () => {
       const { data } = await getAllUser();
-      const keys = ["firstName", "lastName", "username"];
+      const keys = ["firstname", "lastname", "username"];
       const search = (users1) => {
         return users1.filter((user) =>
           keys.some(
             (key) =>
-              user["firstName"] &&
+              user["firstname"] &&
               user[key].toLowerCase().includes(query.toLowerCase())
           )
         );
