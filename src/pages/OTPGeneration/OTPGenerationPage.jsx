@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import "./OTPGenerationPage.css";
 const OTPGenerationPage = () => {
   const [email, setEmail] = useState("");
   const [otp, setOTP] = useState("");
@@ -16,30 +16,32 @@ const OTPGenerationPage = () => {
   };
 
   return (
-    <div className="container">
-      <h2>OTP Generation</h2>
-      {!showOTPInput ? (
-        <div className="input-group">
-          <input
-            type="email"
-            placeholder="Enter your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <button className="btn" onClick={generateOTP}>
-            Generate OTP
-          </button>
-        </div>
-      ) : (
-        <div className="input-group otp-input">
-          <input
-            type="text"
-            placeholder="Enter OTP"
-            value={otp}
-            onChange={handleOTPChange}
-          />
-        </div>
-      )}
+    <div className="otpPage">
+      <div className="container">
+        <h2>OTP Generation</h2>
+        {!showOTPInput ? (
+          <div className="input-group">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+
+            <button onClick={generateOTP}>Generate OTP</button>
+          </div>
+        ) : (
+          <div className="input-group ">
+            <input
+              type="text"
+              placeholder="Enter OTP"
+              value={otp}
+              onChange={handleOTPChange}
+            />
+            <button>Validate</button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

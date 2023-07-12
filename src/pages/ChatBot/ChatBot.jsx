@@ -11,7 +11,7 @@ const ChatBot = () => {
     <div className="home-container-1">
       <LeftSidebar />
       <div className="home-container-3">
-        {user.result.verified ? <Bot /> : <OTPGenerationPage />}
+        {!user.result.verified ? <Bot /> : <OTPGenerationPage />}
       </div>
     </div>
   );
