@@ -60,6 +60,14 @@ const LeftSidebar = () => {
           >
             <p style={{ paddingLeft: "25px" }}>Socio</p>
           </NavLink>
+          <NavLink
+            to="/ChatBot"
+            className="side-nav-links"
+            activeClassName="active"
+            style={{ paddingLeft: "30px" }}
+          >
+            <p style={{ paddingLeft: "25px" }}>ChatBot</p>
+          </NavLink>
         </div>
       </nav>
     </div>

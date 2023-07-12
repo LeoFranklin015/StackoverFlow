@@ -12,6 +12,7 @@ import UserProfile from "./pages/UserProfile/UserProfile";
 import Subscribe from "./pages/Subscribe/Subscribe";
 import Socio from "./pages/Socio/Socio";
 import Profile from "./pages/Profile/Profile";
+import ChatBot from "./pages/ChatBot/ChatBot";
 const AllRoutes = ({ slideIn, handleSlideIn }) => {
   return (
     <Routes>
@@ -53,6 +54,7 @@ const AllRoutes = ({ slideIn, handleSlideIn }) => {
 
       <Route path="/Socio" element={<Socio />}></Route>
       <Route path="/Socio/profile/:id" element={<Profile />}></Route>
+      <Route path="/ChatBot" element={<ChatBot />}></Route>
     </Routes>
   );
 };

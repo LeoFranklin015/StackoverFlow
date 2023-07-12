@@ -19,7 +19,7 @@ const SearchModal = ({ modalOpened, setModalOpened }) => {
           keys.some(
             (key) =>
               user["firstname"] &&
-              user[key].toLowerCase().includes(query.toLowerCase())
+              user["firstname"].toLowerCase().includes(query.toLowerCase())
           )
         );
       };
