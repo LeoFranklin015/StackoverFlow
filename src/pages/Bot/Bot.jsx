@@ -1,6 +1,6 @@
 import React from "react";
 import { useRef, useEffect, useState } from "react";
-
+import "./Bot.css";
 const Bot = () => {
   const [message, setMessage] = useState("");
   const [responses, setResponses] = useState([]);
@@ -8,7 +8,7 @@ const Bot = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("http://localhost:3001/", {
+    fetch("http://localhost:4000/chatbot/question", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
