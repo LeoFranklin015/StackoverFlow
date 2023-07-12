@@ -20,6 +20,15 @@ const PostShare = () => {
   const [loading, setLoading] = useState(false);
 
   const [desc, setDesc] = useState("");
+  const [textareaHeight, setTextareaHeight] = useState("auto");
+
+  const handleInputChange = (e) => {
+    setDesc(e.target.value);
+    const textarea = e.target;
+    textarea.style.height = "auto";
+    const newHeight = textarea.scrollHeight + "px";
+    setTextareaHeight(newHeight);
+  };
 
   const serverPublic = process.env.REACT_APP_PUBLIC_FOLDER;
 
@@ -93,23 +102,24 @@ const PostShare = () => {
   const resetShare = () => {
     setImage(null);
     setDesc("");
+    setTextareaHeight("auto");
   };
   return (
     <div className="PostShare">
       <img
         src={
-          user.profilePicture
-            ? user.profilePicture
+          user.result.profilePicture
+            ? user.result.profilePicture
             : serverPublic + "defaultProfile.png"
         }
         alt="Profile"
       />
       <div>
-        <input
-          type="text"
+        <textarea
+          value={desc}
+          onChange={handleInputChange}
+          style={{ height: textareaHeight }}
           placeholder="What's happening?"
-          required
-          onChange={(e) => setDesc(e.target.value)}
         />
         <div className="postOptions">
           <div

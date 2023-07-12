@@ -37,7 +37,7 @@ const Post = ({ data }) => {
           }}
         />
       ) : (
-        <h5>{data.desc}</h5>
+        <p style={{ whiteSpace: "pre-wrap" }}>{data.desc}</p>
       )}
 
       <div className="postReact">

@@ -157,3 +157,19 @@
   object-fit: cover;
   border-radius: 0.5rem;
 }
+
+.PostShare > div > textarea {
+  background-color: var(--inputColor);
+
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 17px;
+  border: none;
+  outline: none;
+  resize: none;
+  max-height: 200px;
+  overflow-y: "hidden";
+}
+.PostShare > div > textarea ::-webkit-scrollbar {
+  display: none;
+}
