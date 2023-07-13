@@ -1,5 +1,4 @@
 import {
-  CardElement,
   useElements,
   useStripe,
   CardNumberElement,

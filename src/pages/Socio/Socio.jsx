@@ -3,10 +3,10 @@ import LeftSidebar from "../../components/LeftSidebar/LeftSidebar";
 import PostSide from "../PostSide/PostSide";
 import ProfileSide from "../profileSide/ProfileSide";
 import "./Socio.css";
-const Socio = () => {
+const Socio = ({ slideIn, handleSlideIn }) => {
   return (
     <div className="Home">
-      <LeftSidebar />
+      <LeftSidebar slideIn={slideIn} handleSlideIn={handleSlideIn} />
 
       <PostSide />
       <ProfileSide />

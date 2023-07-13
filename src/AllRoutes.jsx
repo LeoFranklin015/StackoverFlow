@@ -20,10 +20,7 @@ const AllRoutes = ({ slideIn, handleSlideIn }) => {
         path="/"
         element={<Home slideIn={slideIn} handleSlideIn={handleSlideIn} />}
       ></Route>
-      <Route
-        path="/Auth"
-        element={<Auth slideIn={slideIn} handleSlideIn={handleSlideIn} />}
-      ></Route>
+      <Route path="/Auth" element={<Auth />}></Route>
       <Route
         path="/Questions"
         element={<Questions slideIn={slideIn} handleSlideIn={handleSlideIn} />}
