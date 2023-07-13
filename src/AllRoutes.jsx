@@ -49,12 +49,29 @@ const AllRoutes = ({ slideIn, handleSlideIn }) => {
         element={<Users slideIn={slideIn} handleSlideIn={handleSlideIn} />}
       ></Route>
 
-      <Route path="/Users/:id" element={<UserProfile />}></Route>
-      <Route path="/Subscribe" element={<Subscribe />}></Route>
+      <Route
+        path="/Users/:id"
+        element={
+          <UserProfile slideIn={slideIn} handleSlideIn={handleSlideIn} />
+        }
+      ></Route>
+      <Route
+        path="/Subscribe"
+        element={<Subscribe slideIn={slideIn} handleSlideIn={handleSlideIn} />}
+      ></Route>
 
-      <Route path="/Socio" element={<Socio />}></Route>
-      <Route path="/Socio/profile/:id" element={<Profile />}></Route>
-      <Route path="/ChatBot" element={<ChatBot />}></Route>
+      <Route
+        path="/Socio"
+        element={<Socio slideIn={slideIn} handleSlideIn={handleSlideIn} />}
+      ></Route>
+      <Route
+        path="/Socio/profile/:id"
+        element={<Profile slideIn={slideIn} handleSlideIn={handleSlideIn} />}
+      ></Route>
+      <Route
+        path="/ChatBot"
+        element={<ChatBot slideIn={slideIn} handleSlideIn={handleSlideIn} />}
+      ></Route>
     </Routes>
   );
 };
