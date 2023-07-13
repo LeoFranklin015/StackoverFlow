@@ -20,3 +20,36 @@
   --location: #ef5757;
   --shedule: #e1ae4a;
 }
+
+@media screen and (min-width: 1200px) {
+  .Home {
+    grid-template-columns: 10rem auto 22rem;
+  }
+}
+
+@media screen and (max-width: 1199px) {
+  .Home {
+    grid-template-columns: 8rem auto 18rem;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .Home {
+    margin-top: 30px;
+    grid-template-columns: 8rem auto 12rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .Home {
+    grid-template-columns: auto;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .ProfileSide {
+    position: absolute;
+    transform: translateX(-100%);
+    z-index: 10;
+  }
+}

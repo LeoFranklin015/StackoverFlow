@@ -139,14 +139,14 @@ const PostShare = () => {
             <UilPlayCircle />
             Video
           </div>
-          <div className="option" style={{ color: "var(--location)" }}>
+          {/* <div className="option" style={{ color: "var(--location)" }}>
             <UilLocationPoint />
             Location
           </div>
           <div className="option" style={{ color: "var(--shedule)" }}>
             <UilSchedule />
             Shedule
-          </div>
+          </div> */}
           <button
             className="button ps-button"
             onClick={handleUpload}
