@@ -16,13 +16,13 @@ function App() {
   const [slideIn, setSlideIn] = useState(true);
 
   useEffect(() => {
-    if (window.innerWidth <= 760) {
+    if (window.innerWidth <= 768) {
       setSlideIn(false);
     }
   }, []);
 
   const handleSlideIn = () => {
-    if (window.innerWidth <= 760) {
+    if (window.innerWidth <= 768) {
       setSlideIn((state) => !state);
     }
   };
