@@ -37,7 +37,11 @@ const Navbar = ({ handleSlideIn }) => {
   return (
     <nav className="main-nav">
       <div className="navbar">
-        <button className="slide-in-icon" onClick={() => handleSlideIn()}>
+        <button
+          className="slide-in-icon"
+          activeClassName="active"
+          onClick={() => handleSlideIn()}
+        >
           <img src={bars} alt="bars" width="15" />
         </button>
         <div className="navbar-1">

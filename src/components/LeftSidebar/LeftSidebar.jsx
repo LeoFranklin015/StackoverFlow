@@ -4,7 +4,13 @@ import { NavLink, useNavigate } from "react-router-dom";
 import Globe from "../../assets/globe.png";
 import { useSelector } from "react-redux";
 
-const LeftSidebar = () => {
+const LeftSidebar = ({ slideIn, handleSlideIn }) => {
+  const slideInStyle = {
+    transform: "translateX(0%)",
+  };
+  const slideOutStyle = {
+    transform: "translateX(-100%)",
+  };
   const navigate = useNavigate();
   const user = useSelector((state) => state.authReducer.authData);
   const handleSocio = (e) => {
@@ -17,7 +23,10 @@ const LeftSidebar = () => {
     }
   };
   return (
-    <div className="left-sidebar">
+    <div
+      className="left-sidebar"
+      style={slideIn ? slideInStyle : slideOutStyle}
+    >
       <nav className="side-nav">
         <NavLink to="/" className="side-nav-links" activeClassName="active">
           <p>Home</p>
