@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import { CheckOTP, generateOTP } from "../../api";
 import "./OTPGenerationPage.css";
-const OTPGenerationPage = () => {
+const OTPGenerationPage = ({ setVerified }) => {
   const [email, setEmail] = useState("");
   const [otp, setOTP] = useState("");
   const [showOTPInput, setShowOTPInput] = useState(false);
@@ -14,9 +15,14 @@ const OTPGenerationPage = () => {
       setShowOTPInput(true);
     }
   };
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const validateOTP = async () => {
-    const status = await CheckOTP({ userId: user.result._id, otp });
-    console.log(status.data.data);
+    const { data } = await CheckOTP({ userId: user.result._id, otp });
+    console.log(data);
+    await dispatch({ type: "USER_VERIFIED", data: data });
+    navigate("/ChatBot");
   };
 
   const handleOTPChange = (e) => {

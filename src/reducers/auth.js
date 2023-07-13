@@ -83,6 +83,14 @@ const authReducer = (
           },
         },
       };
+    case "USER_VERIFIED":
+      localStorage.setItem("Profile", JSON.stringify({ ...action?.data }));
+      return {
+        ...state,
+        authData: action.data,
+        updateLoading: false,
+        error: false,
+      };
 
     default:
       return state;
