@@ -1,20 +1,23 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { GenerateOTP } from "../../actions/OTP";
+import { generateOTP } from "../../api";
 import "./OTPGenerationPage.css";
 const OTPGenerationPage = () => {
   const [email, setEmail] = useState("");
   const [otp, setOTP] = useState("");
   const [showOTPInput, setShowOTPInput] = useState(false);
 
-  const generateOTP = () => {
-    // Here, you can implement your logic to generate the OTP and send it to the provided email address
-    // For the sake of this example, let's assume the OTP is generated and received successfully
+  const generateotp = async () => {
+    const status = await generateOTP({ userId: user.result._id, email });
+    console.log(status);
     setShowOTPInput(true);
   };
 
   const handleOTPChange = (e) => {
     setOTP(e.target.value);
   };
-
+  const user = useSelector((state) => state.authReducer.authData);
   return (
     <div className="otpPage">
       <div className="container">
@@ -28,7 +31,7 @@ const OTPGenerationPage = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
 
-            <button onClick={generateOTP}>Generate OTP</button>
+            <button onClick={generateotp}>Generate OTP</button>
           </div>
         ) : (
           <div className="input-group ">

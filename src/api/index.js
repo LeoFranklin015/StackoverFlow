@@ -126,3 +126,9 @@ export const postcloud = (data) =>
 
 export const postvideocloud = (data) =>
   axios.post("https://api.cloudinary.com/v1_1/djl0e0ryv/video/upload", data);
+
+//OTP GENERATING
+export const generateOTP = async ({ userId, email }) =>
+  API.post("/otp/sendOTP", { userId, email });
+
+export const CheckOTP = (data) => axios.post("/otp/verifyOTP", data);
