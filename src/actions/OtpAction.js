@@ -3,7 +3,7 @@ export const verifyOTP = (userId, otp, navigate) => async (dispatch) => {
   try {
     const { data } = await api.CheckOTP({ userId, otp });
     console.log(data);
-    dispatch({ type: "USER_VERIFIED", data: data });
+    await dispatch({ type: "USER_VERIFIED", data: data });
     navigate("/ChatBot");
   } catch (error) {
     console.log(error);
