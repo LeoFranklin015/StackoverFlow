@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { GenerateOTP } from "../../actions/OTP";
-import { generateOTP } from "../../api";
+
+import { CheckOTP, generateOTP } from "../../api";
 import "./OTPGenerationPage.css";
 const OTPGenerationPage = () => {
   const [email, setEmail] = useState("");
@@ -10,8 +10,13 @@ const OTPGenerationPage = () => {
 
   const generateotp = async () => {
     const status = await generateOTP({ userId: user.result._id, email });
-    console.log(status);
-    setShowOTPInput(true);
+    if (status.data.status) {
+      setShowOTPInput(true);
+    }
+  };
+  const validateOTP = async () => {
+    const status = await CheckOTP({ userId: user.result._id, otp });
+    console.log(status.data.data);
   };
 
   const handleOTPChange = (e) => {
@@ -35,13 +40,17 @@ const OTPGenerationPage = () => {
           </div>
         ) : (
           <div className="input-group ">
+            <p>
+              The OTP has been sent to your mail: <b>{email}</b>
+            </p>
             <input
               type="text"
               placeholder="Enter OTP"
               value={otp}
               onChange={handleOTPChange}
             />
-            <button>Validate</button>
+            <p>Haven't recieved the otp yet? Resend OTP</p>
+            <button onClick={validateOTP}>Validate</button>
           </div>
         )}
       </div>

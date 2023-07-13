@@ -131,4 +131,5 @@ export const postvideocloud = (data) =>
 export const generateOTP = async ({ userId, email }) =>
   API.post("/otp/sendOTP", { userId, email });
 
-export const CheckOTP = (data) => axios.post("/otp/verifyOTP", data);
+export const CheckOTP = ({ userId, otp }) =>
+  API.post("/otp/verifyOTP", { userId, otp });
