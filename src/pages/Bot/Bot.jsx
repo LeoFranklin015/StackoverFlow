@@ -4,11 +4,13 @@ import "./Bot.css";
 const Bot = () => {
   const [message, setMessage] = useState("");
   const [responses, setResponses] = useState([]);
+  const [loading, setLoading] = useState(false);
   const responseContainerRef = useRef(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    fetch("http://localhost:4000/chatbot/question", {
+    setLoading(true);
+    await fetch("http://localhost:4000/chatbot/question", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -24,6 +26,7 @@ const Bot = () => {
         setResponses([...responses, newResponse]);
       })
       .catch((error) => console.log(error));
+    setLoading(false);
     setMessage("");
   };
 
@@ -49,10 +52,12 @@ const Bot = () => {
         <textarea
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          placeholder="Type your message..."
+          placeholder="Ask your Questions here ..."
           className="textarea"
         ></textarea>
-        <button type="submit">Send</button>
+        <button type="submit" disabled={loading}>
+          {loading ? "Processsing" : "Send"}
+        </button>
       </form>
     </div>
   );
