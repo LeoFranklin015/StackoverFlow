@@ -5,10 +5,10 @@ import ProfileLeft from "../ProfileLeft/ProfileLeft";
 import LeftSidebar from "../../components/LeftSidebar/LeftSidebar";
 
 import "./Profile.css";
-const Profile = () => {
+const Profile = (slideIn, handleSlideIn) => {
   return (
     <div className="Profile">
-      <LeftSidebar />
+      <LeftSidebar slideIn={slideIn} handleSlideIn={handleSlideIn} />
       <div className="Profile-center">
         <ProfileCard location="profilePage" />
         <PostSide />

@@ -15,10 +15,32 @@ function App() {
 
   const [slideIn, setSlideIn] = useState(true);
 
+  // useEffect(() => {
+  //   if (window.innerWidth <= 768) {
+  //     setSlideIn(false);
+  //     console.log(slideIn);
+  //   } else {
+  //     setSlideIn(true);
+  //     console.log(slideIn);
+  //   }
+  // }, [window.innerWidth]);
+
   useEffect(() => {
-    if (window.innerWidth <= 768) {
-      setSlideIn(false);
-    }
+    const handleResize = () => {
+      if (window.innerWidth <= 768) {
+        setSlideIn(false);
+      } else {
+        setSlideIn(true);
+      }
+    };
+
+    // Add event listener for resize
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   const handleSlideIn = () => {
