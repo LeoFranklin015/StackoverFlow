@@ -137,6 +137,7 @@ const PostShare = () => {
           style={{ height: textareaHeight }}
           placeholder="What's happening?"
         />
+
         <div className="postOptions">
           <div
             className="option"
@@ -180,7 +181,11 @@ const PostShare = () => {
         </div>
         {image && (
           <div className="previewImage">
-            <UilTimes onClick={() => setImage(null)} />
+            <UilTimes
+              onClick={() => setImage(null)}
+              className="xmark"
+              size="20"
+            />
             <img src={URL.createObjectURL(image)} alt="preview" />
           </div>
         )}

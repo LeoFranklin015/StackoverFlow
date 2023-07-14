@@ -96,6 +96,8 @@
 
 .ProfileImages > img:nth-of-type(1) {
   width: 100%;
+  height: 150px;
+  border-radius: 5px;
 }
 .ProfileImages > img:nth-of-type(2) {
   width: 6rem;

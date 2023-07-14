@@ -66,12 +66,20 @@
   justify-content: center;
 } */
 
+/* .xmark {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  cursor: pointer;
+  z-index: -1;
+}
 .previewImage > svg {
   position: absolute;
   right: 1rem;
   top: 1px;
   cursor: pointer;
-}
+  z-index: 2;
+} */
 
 /* .previewImage > img {
   width: 100%;
@@ -107,7 +115,8 @@
   background-color: var(--inputColor);
   align-items: center;
   justify-content: center;
-}
+} */
+/* 
 
 .video {
   margin-top: 20px;
@@ -130,13 +139,56 @@
   margin-top: 10px;
 } */
 
-.previewImage,
-.previewImage img,
+/* .previewImage,
 .previewImage .video {
+  display: flex;
   max-width: 100%;
   max-height: none;
   width: 100%;
   height: auto;
+} */
+
+.previewImage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.previewImage img {
+  margin-top: 20px;
+  width: 100%;
+  height: fit-content;
+  max-height: 30rem;
+  object-fit: contain;
+  border-radius: 0.5rem;
+  background-color: var(--inputColor);
+}
+
+.previewImage .video {
+  margin-top: 20px;
+  width: 100%;
+  height: fit-content;
+  max-height: 30rem;
+  object-fit: contain;
+  border-radius: 0.5rem;
+  background-color: var(--inputColor);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.PostShare .previewImage .xmark {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 5px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 1;
 }
 
 @media screen and (max-width: 768px) {
