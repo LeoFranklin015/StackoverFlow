@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { followUser, unfollowUser } from "../../actions/UserAction";
+import defaultProfile from "../../assets/defaultProfile.png";
 const User = ({ person }) => {
   const publicFolder = process.env.REACT_APP_PUBLIC_FOLDER;
   const user = useSelector((state) => state.authReducer.authData);
@@ -23,7 +24,7 @@ const User = ({ person }) => {
           src={
             publicFolder + person.profilePicture
               ? person.profilePicture
-              : publicFolder + "defaultProfile.png"
+              : { defaultProfile }
           }
           alt="profile"
           className="followerImage"

@@ -10,7 +10,7 @@ const Bot = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    await fetch("http://localhost:4000/chatbot/question", {
+    await fetch("https://stackoverflow-test.onrender.com/chatbot/question", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

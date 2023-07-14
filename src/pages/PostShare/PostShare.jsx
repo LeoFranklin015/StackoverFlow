@@ -11,6 +11,9 @@ import { postcloud, postvideocloud } from "../../api";
 import ReactPlayer from "react-player";
 import { useNavigate } from "react-router-dom";
 
+import defaultProfile from "../../assets/defaultProfile.png";
+import defaultCover from "../../assets/defaultCover.jpg";
+
 const PostShare = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -122,7 +125,7 @@ const PostShare = () => {
         src={
           user.result.profilePicture
             ? user.result.profilePicture
-            : serverPublic + "defaultProfile.png"
+            : { defaultProfile }
         }
         alt="Profile"
         onClick={handleOnClick}
@@ -175,7 +178,6 @@ const PostShare = () => {
             <input type="file" ref={videoRef} onChange={onVideoChange} />
           </div>
         </div>
-
         {image && (
           <div className="previewImage">
             <UilTimes onClick={() => setImage(null)} />

@@ -3,6 +3,9 @@ import "./ProfileCard.css";
 import ProfileModal from "../InfoCard/ProfileModal";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+
+import defaultProfile from "../../assets/defaultProfile.png";
+import defaultCover from "../../assets/defaultCover.jpg";
 const ProfileCard = ({ location }) => {
   const user = useSelector((state) => state.authReducer.authData);
   const posts = useSelector((state) => state.postReducer.posts);
@@ -16,7 +19,7 @@ const ProfileCard = ({ location }) => {
           src={
             user.result.coverPicture
               ? user.result.coverPicture
-              : serverPublic + "defaultCover.jpg"
+              : { defaultCover }
           }
           alt="CoverImage"
         />
@@ -24,7 +27,7 @@ const ProfileCard = ({ location }) => {
           src={
             user.result.profilePicture
               ? user.result.profilePicture
-              : serverPublic + "defaultProfile.png"
+              : { defaultProfile }
           }
           alt="ProfileImage"
         />

@@ -21,18 +21,18 @@
 }
 
 /* Responsive Styles for Phones */
-@media screen and (max-width: 767px) {
+/* @media screen and (max-width: 767px) {
   .PostSide {
     margin-top: 10px;
     margin-left: 0;
     height: auto;
     overflow: hidden;
   }
-}
+} */
 
 /* Responsive Styles for Tablets */
-@media screen and (min-width: 768px) and (max-width: 1023px) {
+/* @media screen and (min-width: 768px) and (max-width: 1023px) {
   .PostSide {
     margin-top: 30px;
   }
-}
+} */
