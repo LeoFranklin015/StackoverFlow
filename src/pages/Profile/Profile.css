@@ -12,22 +12,16 @@
   overflow: hidden;
 }
 
-@media screen and (min-width: 1200px) {
-  .Profile {
-    grid-template-columns: 10rem auto 22rem;
-  }
-}
-
 @media screen and (max-width: 1199px) {
   .Profile {
-    grid-template-columns: 8rem auto 18rem;
+    grid-template-columns: 10rem auto 15rem;
   }
 }
 
 @media screen and (max-width: 991px) {
   .Profile {
     margin-top: 30px;
-    grid-template-columns: 8rem auto 12rem;
+    grid-template-columns: 10rem auto 12rem;
   }
 }
 
