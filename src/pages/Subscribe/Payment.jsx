@@ -7,6 +7,7 @@ import {
 } from "@stripe/react-stripe-js";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { updatePayment, updateSubscription } from "../../actions/users";
 import "./Payment.css";
 function PaymentForm({ productId }) {
@@ -17,9 +18,11 @@ function PaymentForm({ productId }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.currentUserReducer);
   const id = user.result._id;
+  const [loading, setLoading] = useState(false);
   // console.log(user.result._id);
-
+  const navigate = useNavigate();
   const createSubscription = async () => {
+    setLoading(true);
     try {
       const paymentMethod = await stripe.createPaymentMethod({
         card: elements.getElement(CardNumberElement),
@@ -31,24 +34,28 @@ function PaymentForm({ productId }) {
       );
 
       if (!response) {
+        setLoading(false);
         return alert("Payment unsuccessful!");
       }
 
       const confirm = await stripe.confirmCardPayment(response.clientSecret);
       if (confirm.error) {
+        setLoading(false);
         return alert("Payment unsuccessful!");
       }
       if (productId === "prod_O9pjsBVkDvAtrb") {
         alert("GOLD MEMBERSHIP");
-        dispatch(updateSubscription(user.result._id, "GOLD"));
+        dispatch(updateSubscription(user.result._id, "GOLD", navigate));
       } else {
-        dispatch(updateSubscription(user.result._id, "PLATINUM"));
+        dispatch(updateSubscription(user.result._id, "PLATINUM", navigate));
         alert("PLATINUM MEMBERSHIP");
       }
+      setLoading(false);
 
       alert("Payment Successful! Subscription active.");
     } catch (err) {
       console.error(err);
+      setLoading(false);
       alert("Payment failed! " + err.message);
     }
   };
@@ -112,8 +119,12 @@ function PaymentForm({ productId }) {
         </div>
 
         <div>
-          <button onClick={createSubscription} className="subscribe">
-            Subscribe
+          <button
+            onClick={createSubscription}
+            className="subscribe"
+            disabled={loading}
+          >
+            {loading ? "Please Wait..." : "Subscribe"}
           </button>
         </div>
       </div>
