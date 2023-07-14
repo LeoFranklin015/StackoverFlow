@@ -23,6 +23,8 @@ export const login = (authData, navigate) => async (dispatch) => {
     // dispatch({ type: "AUTH", data });
     navigate("/");
   } catch (error) {
+    alert("Credentials are wrong..");
+
     console.log(error.message);
     dispatch({ type: "AUTH_FAIL" });
   }

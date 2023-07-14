@@ -11,7 +11,7 @@ const Auth = () => {
   const [Issigned, setIssigned] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, SetPassword] = useState("");
+  const [password, SetPassword] = useState();
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ const Auth = () => {
     setIssigned(!Issigned);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email && !password) {
       alert("Enter the email and password");

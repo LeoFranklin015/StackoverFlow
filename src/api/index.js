@@ -1,8 +1,6 @@
 import axios from "axios";
 
-const API = axios.create({
-  baseURL: "https://stackoverflow-test.onrender.com",
-});
+const API = axios.create({ baseURL: "http://localhost:4000" });
 // const API = axios.create({
 //   baseURL: "https://stackoverflow-fo3t.onrender.com",
 // });
