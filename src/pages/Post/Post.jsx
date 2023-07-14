@@ -24,18 +24,20 @@ const Post = ({ data }) => {
       {data.image ? (
         <img src={data.image} alt="" />
       ) : data.video ? (
-        <ReactPlayer
-          url={data.video}
-          controls={true}
-          style={{
-            alignSelf: "center",
-            backgroundColor: "lightgray",
-            width: "100%",
-            borderRadius: "0.5rem",
-            height: "fit-content",
-            justifyContent: "center",
-          }}
-        />
+        <div className="video">
+          <ReactPlayer
+            url={data.video}
+            controls={true}
+            style={{
+              alignSelf: "center",
+              backgroundColor: "lightgray",
+              width: "100%",
+              borderRadius: "0.5rem",
+              height: "fit-content",
+              justifyContent: "center",
+            }}
+          />
+        </div>
       ) : (
         <p style={{ whiteSpace: "pre-wrap" }}>{data.desc}</p>
       )}
