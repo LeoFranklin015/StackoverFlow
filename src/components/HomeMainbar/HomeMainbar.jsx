@@ -39,20 +39,7 @@ const HomeMainbar = () => {
     if (user === null) {
       alert("Login or signup to ask Question ");
       navigate("/Auth/");
-    }
-    // } else {
-    //   if (user.result.subscription === "Free" && noOfQuestionsPosted >= 1) {
-    //     alert(
-    //       "FREE membership can post only one Question a day ! \n Try upgrading your membership"
-    //     );
-    //   } else if (
-    //     user.result.subscription === "GOLD" &&
-    //     noOfQuestionsPosted >= 5
-    //   ) {
-    //     alert(
-    //       "GOLD membership can post only 5 Question a day ! \n Try upgrading your membership"
-    //     );}
-    else {
+    } else {
       console.log(user);
       navigate("/AskQuestion");
     }

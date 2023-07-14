@@ -22,6 +22,16 @@ const LeftSidebar = ({ slideIn, handleSlideIn }) => {
       navigate("/socio");
     }
   };
+
+  const handleChatBot = (e) => {
+    e.preventDefault();
+    if (!user) {
+      alert("Login to use ChatBot");
+      navigate("/Auth");
+    } else {
+      navigate("/ChatBot");
+    }
+  };
   return (
     <div
       className="left-sidebar"
@@ -74,6 +84,7 @@ const LeftSidebar = ({ slideIn, handleSlideIn }) => {
             className="side-nav-links"
             activeClassName="active"
             style={{ paddingLeft: "30px" }}
+            onClick={handleChatBot}
           >
             <p style={{ paddingLeft: "25px" }}>ChatBot</p>
           </NavLink>
