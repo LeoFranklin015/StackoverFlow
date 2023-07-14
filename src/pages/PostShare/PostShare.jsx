@@ -9,9 +9,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { uploadImage, uploadPost } from "../../actions/UploadAction";
 import { postcloud, postvideocloud } from "../../api";
 import ReactPlayer from "react-player";
+import { useNavigate } from "react-router-dom";
 
 const PostShare = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const user = useSelector((state) => state.authReducer.authData);
   console.log(user);
 
@@ -104,6 +106,16 @@ const PostShare = () => {
     setDesc("");
     setTextareaHeight("auto");
   };
+
+  const handleOnClick = (e) => {
+    e.preventDefault();
+    if (!user) {
+      alert("Expired.. Login again");
+      navigate("/Auth");
+    } else {
+      navigate(`/Socio/profile/${user.result._id}`);
+    }
+  };
   return (
     <div className="PostShare">
       <img
@@ -113,6 +125,7 @@ const PostShare = () => {
             : serverPublic + "defaultProfile.png"
         }
         alt="Profile"
+        onClick={handleOnClick}
       />
       <div>
         <textarea
