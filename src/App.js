@@ -47,6 +47,7 @@ function App() {
     if (window.innerWidth <= 768) {
       setSlideIn((state) => !state);
     }
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
