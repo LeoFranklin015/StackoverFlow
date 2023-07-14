@@ -20,6 +20,7 @@ const LeftSidebar = ({ slideIn, handleSlideIn }) => {
       navigate("/Auth/");
     } else {
       navigate("/socio");
+      handleSlideIn();
     }
   };
 
@@ -30,15 +31,22 @@ const LeftSidebar = ({ slideIn, handleSlideIn }) => {
       navigate("/Auth");
     } else {
       navigate("/ChatBot");
+      handleSlideIn();
     }
   };
+
   return (
     <div
       className="left-sidebar"
       style={slideIn ? slideInStyle : slideOutStyle}
     >
       <nav className="side-nav">
-        <NavLink to="/" className="side-nav-links" activeClassName="active">
+        <NavLink
+          to="/"
+          className="side-nav-links"
+          activeClassName="active"
+          onClick={handleSlideIn}
+        >
           <p>Home</p>
         </NavLink>
         <div className="side-nav-div">
@@ -50,6 +58,7 @@ const LeftSidebar = ({ slideIn, handleSlideIn }) => {
             className="side-nav-links"
             activeClassName="active"
             style={{ paddingLeft: "30px" }}
+            onClick={handleSlideIn}
           >
             <img src={Globe} alt="globe" className="globe" />
             <p style={{ paddingLeft: "10px" }}>Questions</p>
@@ -59,6 +68,7 @@ const LeftSidebar = ({ slideIn, handleSlideIn }) => {
             className="side-nav-links"
             activeClassName="active"
             style={{ paddingLeft: "30px" }}
+            onClick={handleSlideIn}
           >
             <p style={{ paddingLeft: "25px" }}>Tags</p>
           </NavLink>
@@ -67,6 +77,7 @@ const LeftSidebar = ({ slideIn, handleSlideIn }) => {
             className="side-nav-links"
             activeClassName="active"
             style={{ paddingLeft: "30px" }}
+            onClick={handleSlideIn}
           >
             <p style={{ paddingLeft: "25px" }}>Users</p>
           </NavLink>
