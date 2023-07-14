@@ -116,7 +116,7 @@ nav img {
   }
 }
 
-@media screen and (max-width: 620px) {
+@media screen and (max-width: 640px) {
   .navbar .navbar-1 .res-nav {
     display: none;
   }

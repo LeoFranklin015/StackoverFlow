@@ -9,32 +9,17 @@ import { fetchAllUsers } from "../../actions/users";
 const HomeMainbar = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.currentUserReducer);
-  const User = useSelector((state) => state.updatedUserReducer);
+
   useEffect(() => {
     dispatch(setCurrentUser(JSON.parse(localStorage.getItem("Profile"))));
   }, [dispatch]);
   const navigate = useNavigate();
   const location = useLocation();
-  ////////
+
   useEffect(() => {
     dispatch(fetchAllUsers());
   }, [dispatch]);
-  // const [lastPostedDate, setLastPostedDate] = useState(
-  //   user?.result.lastPostedDate
-  // );
-  // const [noOfQuestionsPosted, setNoOfQuestionsPosted] = useState(
-  //   user?.result.noOfQuestionsPosted
-  // );
-  // useEffect(() => {
-  //   const currentDate = new Date();
-  //   const currentDateString = currentDate.toDateString();
-  //   if (currentDateString !== lastPostedDate) {
-  //     setLastPostedDate(currentDateString);
-  //     // setNoOfQuestionsPosted(0);
-  //   }
-  // }, [lastPostedDate, noOfQuestionsPosted]);
 
-  ////////////
   const checkAuth = () => {
     if (user === null) {
       alert("Login or signup to ask Question ");
@@ -57,16 +42,18 @@ const HomeMainbar = () => {
         ) : (
           <h1>All Questions</h1>
         )}
-        {user !== null ? (
-          <button onClick={handleSubscribe} className="ask-btn-1">
-            Subscription
+        <div className="btns">
+          {user !== null ? (
+            <button onClick={handleSubscribe} className="ask-btn-1">
+              Subscription
+            </button>
+          ) : (
+            <></>
+          )}
+          <button onClick={checkAuth} className="ask-btn">
+            AskQuestion
           </button>
-        ) : (
-          <></>
-        )}
-        <button onClick={checkAuth} className="ask-btn">
-          Ask Question
-        </button>
+        </div>
       </div>
 
       <div>
