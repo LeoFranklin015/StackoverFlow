@@ -180,12 +180,13 @@ const PostShare = () => {
                 borderRadius: "50%",
               }}
             />
-
-            <ReactPlayer
-              url={URL.createObjectURL(video)}
-              controls={true}
-              alt="preview"
-            />
+            <div className="video">
+              <ReactPlayer
+                url={URL.createObjectURL(video)}
+                controls={true}
+                alt="preview"
+              />
+            </div>
           </div>
         )}
       </div>

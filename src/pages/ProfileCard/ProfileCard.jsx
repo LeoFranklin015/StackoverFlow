@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import "./ProfileCard.css";
-
+import ProfileModal from "../InfoCard/ProfileModal";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 const ProfileCard = ({ location }) => {
   const user = useSelector((state) => state.authReducer.authData);
   const posts = useSelector((state) => state.postReducer.posts);
   const serverPublic = process.env.REACT_APP_PUBLIC_FOLDER;
+  const [modalOpened, setModalOpened] = useState(false);
 
   return (
     <div className="ProfileCard">
@@ -69,7 +70,16 @@ const ProfileCard = ({ location }) => {
       </div>
 
       {location === "profilePage" ? (
-        ""
+        <span>
+          <button className="edit" onClick={() => setModalOpened(true)}>
+            Edit Profile
+          </button>
+          <ProfileModal
+            modalOpened={modalOpened}
+            setModalOpened={setModalOpened}
+            data={user.result}
+          />
+        </span>
       ) : (
         <span>
           <Link

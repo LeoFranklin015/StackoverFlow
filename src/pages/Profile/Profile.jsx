@@ -5,7 +5,7 @@ import ProfileLeft from "../ProfileLeft/ProfileLeft";
 import LeftSidebar from "../../components/LeftSidebar/LeftSidebar";
 
 import "./Profile.css";
-const Profile = (slideIn, handleSlideIn) => {
+const Profile = ({ slideIn, handleSlideIn }) => {
   return (
     <div className="Profile">
       <LeftSidebar slideIn={slideIn} handleSlideIn={handleSlideIn} />

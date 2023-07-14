@@ -168,3 +168,11 @@
   margin-bottom: 1rem;
   cursor: pointer;
 }
+.edit {
+  font-weight: bold;
+  color: orange;
+  align-self: center;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  background-color: transparent;
+}

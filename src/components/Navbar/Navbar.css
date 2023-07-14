@@ -120,4 +120,12 @@ nav img {
   .navbar .navbar-1 .res-nav {
     display: none;
   }
+  .nav-links {
+    padding: 5px 10px;
+    font-size: 10px;
+    border: solid 1px blue;
+    border-radius: 3px;
+    background-color: #e7f8fe;
+    cursor: pointer;
+  }
 }

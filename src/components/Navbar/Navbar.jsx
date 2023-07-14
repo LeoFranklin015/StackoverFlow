@@ -84,7 +84,7 @@ const Navbar = ({ handleSlideIn }) => {
                 </Link>
               </Avatar>
               <button className="nav-item nav-links" onClick={handleLogout}>
-                Log out
+                Logout
               </button>
             </>
           )}
