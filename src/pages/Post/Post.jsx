@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Post.css";
-import Comment from "../../assets/message-regular.svg";
-import Share from "../../assets/paper-plane-regular.svg";
+
 import Heart from "../../assets/heart-solid.svg";
 import NotLike from "../../assets/heart-regular.svg";
 import { likePost } from "../../api/index";
@@ -10,9 +9,23 @@ import ReactPlayer from "react-player";
 
 const Post = ({ data }) => {
   const user = useSelector((state) => state.authReducer.authData);
+  const allusers = useSelector((state) => state.usersReducer);
   const [liked, setLiked] = useState(data.likes.includes(user.result._id));
   const [likes, setLikes] = useState(data.likes.length);
+  const [User, setUser] = useState("");
+  const [dp, setDp] = useState("");
 
+  useEffect(() => {
+    username();
+  }, [allusers]);
+  const username = () => {
+    const userFound = allusers.find((user) => user._id === data.userId);
+    console.log(userFound);
+    if (userFound) {
+      setUser(userFound.username);
+      setDp(userFound.profilePicture);
+    }
+  };
   const handleLike = () => {
     likePost(data._id, user.result._id);
     setLiked((prev) => !prev);
@@ -21,6 +34,10 @@ const Post = ({ data }) => {
   const bgcolor = `rgba(40, 52, 62, 0.07)`;
   return (
     <div className="Post">
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <img src={dp} alt="" width="30px" style={{ borderRadius: "50%" }} />
+        {User && <h5>@{User}</h5>}
+      </div>
       {data.image ? (
         <img src={data.image} alt="" />
       ) : data.video ? (
