@@ -24,6 +24,7 @@
   background-color: white;
   cursor: pointer;
   transition: 0.3s;
+  color: black;
 }
 .edit-profile-btn:hover {
   background-color: #f5f9fc;
