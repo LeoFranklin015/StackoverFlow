@@ -15,6 +15,9 @@
   display: flex;
 }
 
+.question-votes {
+  margin-right: 10px;
+}
 .question-votes p {
   margin: 0%;
   font-size: 25px;
@@ -28,7 +31,7 @@
 }
 
 .votes-icon:active {
-  color: •#ef8236;
+  color: #ef8236;
 }
 
 .question-details-container .question-body {
@@ -72,6 +75,10 @@
   cursor: pointer;
   font-size: 14px;
   transition: 0.3s;
+}
+.question-actions-user button:hover {
+  background-color: transparent;
+  color: #303030;
 }
 
 .question-actions-user button:active {

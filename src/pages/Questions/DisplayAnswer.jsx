@@ -9,7 +9,7 @@ const DisplayAnswer = ({ question }) => {
   const location = useLocation();
   const dispatch = useDispatch();
   const { id } = useParams();
-  const url = "https://stackoverflow-basic.netlify.app";
+  const url = "https://stackoverflow-trial.netlify.app";
 
   const user = useSelector((state) => state.currentUserReducer);
   const handleShare = () => {

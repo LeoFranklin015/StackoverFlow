@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import copy from "copy-to-clipboard";
 import { useLocation } from "react-router-dom";
-import up from "../../assets/up.svg";
-import down from "../../assets/down.svg";
+import up from "../../assets/circle-chevron-up-solid.svg";
+import colourup from "../../assets/circle-chevron-up-solid-copy.svg";
+import colourdown from "../../assets/circle-chevron-down-solid-copy.svg";
+
+import down from "../../assets/circle-chevron-down-solid.svg";
 import Avatar from "../../components/Avatar/Avatar";
 import DisplayAnswer from "./DisplayAnswer";
 import "./Question.css";
@@ -66,11 +69,20 @@ const QuestionDetails = () => {
   };
 
   const handleUpVote = () => {
-    dispatch(voteQuestion(id, "upvote", user.result._id));
+    if (!user) {
+      alert("Login to vote...");
+      navigate("/Auth");
+    } else {
+      dispatch(voteQuestion(id, "upvote", user.result._id));
+    }
   };
-
   const handleDownVote = () => {
-    dispatch(voteQuestion(id, "downvote", user.result._id));
+    if (!user) {
+      alert("Login to vote...");
+      navigate("/Auth");
+    } else {
+      dispatch(voteQuestion(id, "downvote", user.result._id));
+    }
   };
 
   return (
@@ -88,7 +100,11 @@ const QuestionDetails = () => {
                   <div className="question-details-container-2">
                     <div className="question-votes">
                       <img
-                        src={up}
+                        src={
+                          question.upVote.includes(user?.result._id)
+                            ? colourup
+                            : up
+                        }
                         alt="up-arrow"
                         width="20"
                         className="votes-icon"
@@ -96,7 +112,11 @@ const QuestionDetails = () => {
                       />
                       <p>{question.upVote.length - question.downVote.length}</p>
                       <img
-                        src={down}
+                        src={
+                          question.downVote.includes(user.result._id)
+                            ? colourdown
+                            : down
+                        }
                         alt="down-arrow"
                         width="20"
                         className="votes-icon"
