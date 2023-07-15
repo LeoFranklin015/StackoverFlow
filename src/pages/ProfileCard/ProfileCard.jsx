@@ -19,7 +19,7 @@ const ProfileCard = ({ location }) => {
           src={
             user.result.coverPicture
               ? user.result.coverPicture
-              : { defaultCover }
+              : "https://asset.cloudinary.com/djl0e0ryv/bd906b94bd097900480f02727ad1cf58"
           }
           alt="CoverImage"
         />

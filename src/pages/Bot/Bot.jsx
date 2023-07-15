@@ -1,11 +1,26 @@
 import React from "react";
 import { useRef, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import "./Bot.css";
 const Bot = () => {
   const [message, setMessage] = useState("");
   const [responses, setResponses] = useState([]);
   const [loading, setLoading] = useState(false);
   const responseContainerRef = useRef(null);
+  const [textareaHeight, setTextareaHeight] = useState("auto");
+  const [isResized, setIsResized] = useState(false);
+  const user = useSelector((state) => state.authReducer.authData);
+
+  const handleInputChange = (e) => {
+    setMessage(e.target.value);
+  };
+
+  useEffect(() => {
+    const textarea = document.getElementById("textarea");
+    textarea.style.height = "auto";
+    const newHeight = textarea.scrollHeight + "px";
+    textarea.style.height = newHeight;
+  }, [textareaHeight, message]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,17 +58,31 @@ const Bot = () => {
       <div className="response-container" ref={responseContainerRef}>
         {responses.map((response, index) => (
           <div key={index} className="response">
-            <div className="question">{response.question}</div>
+            <div
+              className="user"
+              style={{
+                display: "flex",
+                gap: "10px",
+                fontWeight: "bold",
+                fontSize: "13px",
+              }}
+            >
+              <h4>{user.result.name} : </h4>
+              <pre className="question">{response.question}</pre>
+            </div>
+
             <pre className="answer">{response.answer}</pre>
           </div>
         ))}
       </div>
       <form onSubmit={handleSubmit} className="input-form">
         <textarea
+          id="textarea"
           value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          placeholder="Ask your Questions here ..."
+          onChange={handleInputChange}
+          placeholder="Heyy I am here to help your coding troubles."
           className="textarea"
+          style={{ height: textareaHeight }}
         ></textarea>
         <button type="submit" disabled={loading}>
           {loading ? "Processsing" : "Send"}

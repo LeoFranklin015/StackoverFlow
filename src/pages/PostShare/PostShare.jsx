@@ -1,9 +1,8 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./PostShare.css";
 import { UilScenery } from "@iconscout/react-unicons";
 import { UilPlayCircle } from "@iconscout/react-unicons";
-import { UilLocationPoint } from "@iconscout/react-unicons";
-import { UilSchedule } from "@iconscout/react-unicons";
+
 import { UilTimes } from "@iconscout/react-unicons";
 import { useDispatch, useSelector } from "react-redux";
 import { uploadImage, uploadPost } from "../../actions/UploadAction";
@@ -29,11 +28,13 @@ const PostShare = () => {
 
   const handleInputChange = (e) => {
     setDesc(e.target.value);
-    const textarea = e.target;
+  };
+  useEffect(() => {
+    const textarea = document.getElementById("textarea");
     textarea.style.height = "auto";
     const newHeight = textarea.scrollHeight + "px";
-    setTextareaHeight(newHeight);
-  };
+    textarea.style.height = newHeight;
+  }, [textareaHeight, desc]);
 
   const serverPublic = process.env.REACT_APP_PUBLIC_FOLDER;
 
@@ -42,6 +43,7 @@ const PostShare = () => {
     if (event.target.files && event.target.files[0]) {
       let img = event.target.files[0];
       setImage(img);
+      event.target.value = null;
     }
   };
 
@@ -50,6 +52,7 @@ const PostShare = () => {
     if (event.target.files && event.target.files[0]) {
       let vid = event.target.files[0];
       setVideo(vid);
+      event.target.value = null;
     }
   };
 
@@ -106,6 +109,7 @@ const PostShare = () => {
   // Reset Post Share
   const resetShare = () => {
     setImage(null);
+    setVideo(null);
     setDesc("");
     setTextareaHeight("auto");
   };
@@ -132,6 +136,7 @@ const PostShare = () => {
       />
       <div>
         <textarea
+          id="textarea"
           value={desc}
           onChange={handleInputChange}
           style={{ height: textareaHeight }}
@@ -142,7 +147,10 @@ const PostShare = () => {
           <div
             className="option"
             style={{ color: "var(--photo)" }}
-            onClick={() => imageRef.current.click()}
+            onClick={() => {
+              imageRef.current.click();
+              setVideo(null);
+            }}
           >
             <UilScenery />
             Photo
@@ -151,7 +159,10 @@ const PostShare = () => {
           <div
             className="option"
             style={{ color: "var(--video)" }}
-            onClick={() => videoRef.current.click()}
+            onClick={() => {
+              videoRef.current.click();
+              setImage(null);
+            }}
           >
             <UilPlayCircle />
             Video
@@ -193,6 +204,7 @@ const PostShare = () => {
           <div className="previewImage">
             <UilTimes
               onClick={() => setVideo(null)}
+              className="xmark"
               style={{
                 color: "red",
                 padding: "2px",

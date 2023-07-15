@@ -12,6 +12,7 @@ const Auth = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, SetPassword] = useState();
+  const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -29,9 +30,13 @@ const Auth = () => {
       if (!name) {
         alert("Enter the name to continue");
       }
+      setLoading(true);
       dispatch(signup({ name, email, password }, navigate));
+      setLoading(false);
     } else {
+      setLoading(true);
       dispatch(login({ email, password }, navigate));
+      setLoading(false);
     }
     // console.log({ name, email, password });
   };
@@ -96,7 +101,13 @@ const Auth = () => {
           )}
 
           <button type="submit" className="auth-btn">
-            {Issigned ? "sign up" : "Log in"}
+            {!Issigned
+              ? loading
+                ? "Logging in"
+                : "Log in"
+              : loading
+              ? "Please Wait"
+              : "Sign up!"}
           </button>
           {Issigned && (
             <p className="terms">
@@ -116,7 +127,7 @@ const Auth = () => {
         <p>
           {!Issigned ? "Don't have an account?" : "already have an account ?"}
           <button type="button" className="switch-btn" onClick={handleSwitch}>
-            {Issigned ? "Log in " : "Sign up!"}
+            {Issigned ? "Log in" : "Sign up!"}
           </button>
         </p>
       </div>
