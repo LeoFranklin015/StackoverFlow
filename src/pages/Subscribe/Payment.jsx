@@ -69,16 +69,17 @@ function PaymentForm({ productId }) {
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            style={{ width: "70%", height: "25px", fontSize: "14px" }}
+            style={{ width: "75%", height: "20px", fontSize: "14px" }}
           />
         </div>
         <div className="input-field">
-          Email:{" "}
+          <label htmlFor="card-number">Email</label>
+
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            style={{ width: "70%", height: "25px", fontSize: "14px" }}
+            style={{ width: "75%", height: "20px", fontSize: "14px" }}
           />
         </div>
         <div className="form-row">

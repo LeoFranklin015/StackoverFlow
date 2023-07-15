@@ -4,6 +4,7 @@
   align-items: center;
   height: 100%;
   background-color: #f0f0f0;
+  margin-top: 20px;
 }
 
 .card-container {
@@ -19,6 +20,8 @@
 
 .input-field {
   margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
 }
 
 .input-field input[type="text"],

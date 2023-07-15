@@ -32,4 +32,5 @@ export const login = (authData, navigate) => async (dispatch) => {
 
 export const logout = () => async (dispatch) => {
   dispatch({ type: "LOG_OUT" });
+  alert("Logged out successfully");
 };
