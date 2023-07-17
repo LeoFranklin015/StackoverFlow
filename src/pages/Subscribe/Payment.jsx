@@ -210,8 +210,6 @@ function PaymentForm({ productId }) {
       }
 
       setLoading(false);
-
-      alert("Payment Successful! Subscription active.");
     } catch (err) {
       console.error(err);
       setLoading(false);
