@@ -89,7 +89,7 @@ const AskQuestion = () => {
       ) {
         console.log(noOfQuestionsPosted);
         alert(
-          "GOLD membership can post only 5 Questions a day! \n Try upgrading your membership"
+          "Silver membership can post only 5 Questions a day! \n Try upgrading your membership"
         );
         navigate("/Subscribe");
       } else {

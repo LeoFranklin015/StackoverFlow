@@ -28,7 +28,7 @@ import React, { useState } from "react";
 import { Modal, useMantineTheme } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 import "./ConfirmationPage.css";
-const ConfirmationPage = ({ modalOpened, setModalOpened }) => {
+const ConfirmationPage = ({ modalOpened, setModalOpened, type }) => {
   const theme = useMantineTheme();
 
   const handleCloseModal = () => {
@@ -52,6 +52,13 @@ const ConfirmationPage = ({ modalOpened, setModalOpened }) => {
     >
       <div className="modal-content">
         <h2>Payment Successful!</h2>
+        <p>
+          🎉Congratulations you have activated <b>{type}</b> membership🎉
+          <br />
+          {type === "Silver"
+            ? "You can post 5 questions a day!"
+            : "There is no limit to ask questions"}
+        </p>
         <p>Your payment has been successfully processed.</p>
         <button
           className="back-button"

@@ -162,6 +162,7 @@ function PaymentForm({ productId }) {
   const [email, setEmail] = useState("");
   const [modalOpened, setModalOpened] = useState(false);
   const [paymentSuccess, setPaymentSuccess] = useState(false); // Add payment success state
+  const [type, setType] = useState("Free");
   const stripe = useStripe();
   const elements = useElements();
   const dispatch = useDispatch();
@@ -195,15 +196,17 @@ function PaymentForm({ productId }) {
 
       // Payment successful
       if (productId === "prod_O9pjsBVkDvAtrb") {
-        await dispatch(
-          updateSubscription(user.result._id, "GOLD", navigate)
-        ).then(() => {
+        await dispatch(updateSubscription(user.result._id, "GOLD")).then(() => {
           setModalOpened(true);
-          setPaymentSuccess(true); // Set payment success state to true
+          setPaymentSuccess(true);
+          setType("Silver");
         });
       } else {
-        dispatch(updateSubscription(user.result._id, "PLATINUM", navigate));
-        alert("PLATINUM MEMBERSHIP");
+        dispatch(updateSubscription(user.result._id, "PLATINUM")).then(() => {
+          setModalOpened(true);
+          setPaymentSuccess(true);
+          setType("Gold");
+        });
       }
 
       setLoading(false);
@@ -220,7 +223,7 @@ function PaymentForm({ productId }) {
     <div className="payment-form-container" style={{ padding: "10px" }}>
       <div className="card-container">
         <div className="input-field">
-          // Name: //{" "}
+          Name{" "}
           <input
             type="text"
             value={name}
@@ -291,6 +294,7 @@ function PaymentForm({ productId }) {
         <ConfirmationPage
           modalOpened={modalOpened}
           setModalOpened={setModalOpened}
+          type={type}
         />
       )}
     </div>

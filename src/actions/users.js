@@ -18,12 +18,10 @@ export const updateProfile = (id, updateData) => async (dispatch) => {
   }
 };
 
-export const updateSubscription = (id, type, navigate) => async (dispatch) => {
+export const updateSubscription = (id, type) => async (dispatch) => {
   try {
     const { data } = await api.updateSubscription({ id, type });
     dispatch({ type: "UPDATE_SUBSCRIPTION", payload: data });
-
-    // navigate("/");
   } catch (error) {
     console.log(error);
   }

@@ -40,7 +40,7 @@ const Subscribe = () => {
               : "subscription-button btn"
           }
         >
-          GOLD
+          Silver
         </button>
         <button
           onClick={handlePlatinum}
@@ -50,7 +50,7 @@ const Subscribe = () => {
               : "subscription-button btn"
           }
         >
-          Platinum
+          GOLD
         </button>
         {showPaymentFormGold && (
           <Elements stripe={stripePromise}>
