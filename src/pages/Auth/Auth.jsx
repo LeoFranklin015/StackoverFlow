@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Auth.css";
 import AboutAuth from "./AboutAuth";
 import { useState } from "react";
@@ -8,6 +8,9 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const Auth = () => {
+  // useEffect(() => {
+  //   console.log(loading);
+  // }, [loading]);
   const [Issigned, setIssigned] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -21,25 +24,58 @@ const Auth = () => {
     setIssigned(!Issigned);
   };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   if (!email && !password) {
+  //     alert("Enter the email and password");
+  //   }
+  //   if (Issigned) {
+  //     if (!name) {
+  //       alert("Enter the name to continue");
+  //     }
+  //     setLoading(true);
+  //     dispatch(signup({ name, email, password }, navigate));
+  //     setLoading(false);
+  //   } else {
+  //     setLoading(true);
+  //     dispatch(login({ email, password }, navigate));
+  //     setLoading(false);
+  //   }
+  //   // console.log({ name, email, password });
+  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email && !password) {
       alert("Enter the email and password");
+      return;
     }
+
+    setLoading(true);
+
     if (Issigned) {
       if (!name) {
         alert("Enter the name to continue");
+        setLoading(false);
+        return;
       }
-      setLoading(true);
-      dispatch(signup({ name, email, password }, navigate));
-      setLoading(false);
+      try {
+        await dispatch(signup({ name, email, password }, navigate));
+        setLoading(false);
+      } catch (error) {
+        // Handle error (e.g., show error message)
+        setLoading(false);
+      }
     } else {
-      setLoading(true);
-      dispatch(login({ email, password }, navigate));
-      setLoading(false);
+      try {
+        await dispatch(login({ email, password }, navigate));
+        setLoading(false);
+      } catch (error) {
+        // Handle error (e.g., show error message)
+        setLoading(false);
+      }
     }
-    // console.log({ name, email, password });
   };
+
   return (
     <div className="Auth-section">
       {Issigned && <AboutAuth />}
@@ -100,7 +136,12 @@ const Auth = () => {
             </label>
           )}
 
-          <button type="submit" className="auth-btn">
+          <button
+            type="submit"
+            className="auth-btn"
+            disabled={loading}
+            style={{ backgroundColor: loading ? "gray" : "" }}
+          >
             {!Issigned
               ? loading
                 ? "Logging in"
