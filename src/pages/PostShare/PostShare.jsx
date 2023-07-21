@@ -22,9 +22,18 @@ const PostShare = () => {
   const [image, setImage] = useState(null);
   const [video, setVideo] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [videoPlaying, setVideoPlaying] = useState(false);
 
   const [desc, setDesc] = useState("");
   const [textareaHeight, setTextareaHeight] = useState("auto");
+
+  const handleVideoPlay = () => {
+    setVideoPlaying(true);
+  };
+
+  const handleVideoPause = () => {
+    setVideoPlaying(false);
+  };
 
   const handleInputChange = (e) => {
     setDesc(e.target.value);
@@ -213,9 +222,19 @@ const PostShare = () => {
               }}
             />
             <div className="video">
-              <ReactPlayer
-                url={URL.createObjectURL(video)}
-                controls={true}
+              {/* <ReactPlayer url={URL.createObjectURL(video)} controls={true} /> */}
+              <video
+                src={URL.createObjectURL(video)}
+                controls
+                width="100%"
+                height="auto"
+                onPlay={handleVideoPlay}
+                onPause={handleVideoPause}
+                onClick={() => {
+                  if (!videoPlaying) {
+                    setVideoPlaying(true);
+                  }
+                }}
                 alt="preview"
               />
             </div>
